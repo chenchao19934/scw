@@ -1,4 +1,4 @@
-import Cark from '@/pages/compon/cark';
+import Cark from '@/page/compon/cark';
 export default {
     components : {
         Cark

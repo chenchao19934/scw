@@ -5,49 +5,49 @@ import Router from 'vue-router';
 // 首页
 // const home = () => import('@/page/home/index');
 
-const home = () => import('@/pages/newHome/homePage/index');
-const homeAddress = () => import('@/pages/my_location/choose_address');
+const home = () => import('@/page/newHome/homePage/index');
+const homeAddress = () => import('@/page/my_location/choose_address');
 // 分类
-const list = () => import('@/pages/newHome/listPage/index');
-const dishList = () => import('@/pages/dishList/index');
-const dishDetail = () => import('@/pages/dishDetailed/index');
+const list = () => import('@/page/newHome/listPage/index');
+const dishList = () => import('@/page/dishList/index');
+const dishDetail = () => import('@/page/dishDetailed/index');
 // 我的
-const my = () => import('@/pages/newHome/myPage/index');
-const search = () => import('@/pages/dishSearch/index');
-const searchDish = () => import('@/pages/dishSearch/searchDish');
-const location = () => import('@/pages/my_location/address_list');
-const locationEdit = () => import('@/pages/my_location/address_edit');
-const locationAdd = () => import('@/pages/my_location/address_add');
-const collection = () => import('@/pages/my_collection/index');
-const evals = () => import('@/pages/my_evaluate/index');
-const Map = () => import('@/pages/compon/map');
-const Suggestion = () => import('@/pages/my_suggestion/index');
+const my = () => import('@/page/newHome/myPage/index');
+const search = () => import('@/page/dishSearch/index');
+const searchDish = () => import('@/page/dishSearch/searchDish');
+const location = () => import('@/page/my_location/address_list');
+const locationEdit = () => import('@/page/my_location/address_edit');
+const locationAdd = () => import('@/page/my_location/address_add');
+const collection = () => import('@/page/my_collection/index');
+const evals = () => import('@/page/my_evaluate/index');
+const Map = () => import('@/page/compon/map');
+const Suggestion = () => import('@/page/my_suggestion/index');
 // 积分商城
-const Integral = () => import('@/pages/integral/index');
-const InteRule = () => import('@/pages/integral/InteRule');
-const IntegralList = () => import('@/pages/integral_list/index');
+const Integral = () => import('@/page/integral/index');
+const InteRule = () => import('@/page/integral/InteRule');
+const IntegralList = () => import('@/page/integral_list/index');
 // 优惠券列表
-const Coupon = ()=> import('@/pages/my_coupon/index');
+const Coupon = ()=> import('@/page/my_coupon/index');
 // 我的礼品盒
-const Gift = ()=> import('@/pages/my_gift/index');
+const Gift = ()=> import('@/page/my_gift/index');
 // 我的余额
-const Balanced = ()=> import('@/pages/my_banlace/index');
+const Balanced = ()=> import('@/page/my_banlace/index');
 // 邀请有礼
-const Invited = ()=> import('@/pages/my_invited/index');
-const InvitedRule = ()=> import('@/pages/my_invited/invited_rule');
+const Invited = ()=> import('@/page/my_invited/index');
+const InvitedRule = ()=> import('@/page/my_invited/invited_rule');
 // 登录退出
-const Login = () => import('@/pages/login/index');
-const LoginExit = () => import('@/pages/login_exit/index');
+const Login = () => import('@/page/login/index');
+const LoginExit = () => import('@/page/login_exit/index');
 // 订单
-const Order = () => import('@/pages/order/index');
-const OrderDetails = () => import('@/pages/order_details/index');
+const Order = () => import('@/page/order/index');
+const OrderDetails = () => import('@/page/order_details/index');
 
 // 购物车
-const cark = ()=> import('@/pages/newHome/cark/index');
-const CarkChange = ()=> import('@/pages/cark_exchange/index');
-const carkCouponList = ()=> import('@/pages/cark_redPack/index');
-const carkOrder = ()=> import('@/pages/cark_settlement/index');
-const carkAddress = () => import('@/pages/my_location/choose_cark');
+const cark = ()=> import('@/page/newHome/cark/index');
+const CarkChange = ()=> import('@/page/cark_exchange/index');
+const carkCouponList = ()=> import('@/page/cark_redPack/index');
+const carkOrder = ()=> import('@/page/cark_settlement/index');
+const carkAddress = () => import('@/page/my_location/choose_cark');
 
 Vue.use(Router);
 

@@ -77,7 +77,7 @@
             },
             initShare() {
                 if (this.$device === 'wechat') {
-                    const url = `https://scw.new.songcaiwa.cn/public/share-page.html?uId=${localStorage.userId}`;
+                    const url = `${process.env.BASE_URL}/public/share-page.html?uId=${localStorage.userId}`;
                     this.wxShare('新人专享，您已获得满59减30红包，戳我买买买','看见好的，就想起你!',url,'https://scwnew.oss-cn-shenzhen.aliyuncs.com/lALPBbCc1UvSoEDMyMzI_200_200.png',(res)=> {
                         if (res === 'shareSuccess') {
                             this.$toast('分享成功！')

@@ -107,16 +107,16 @@
         },
         data() {
             return {
-                msgShow : true,                        //  留言
-                styleShow : false,                      //  配送方式
-                dl_type_message : '不要吵，放门口就好',   //  配送方式名称
-                dl_type : '',                           //  配送方式索引
-                couponList : [],                        //  可用优惠券商品列表
-                uncouponList : [],                      //  不可用优惠券商品列表
+                msgShow : true,                             //  留言
+                styleShow : false,                          //  配送方式
+                dl_type_message : '不要吵，放门口就好',       //  配送方式名称
+                dl_type : '',                               //  配送方式索引
+                couponList : [],                            //  可用优惠券商品列表
+                uncouponList : [],                          //  不可用优惠券商品列表
                 address: {},
                 order : {},
-                time : '',                              //  服务器时间
-                // dataJson : '',                          //  时间json
+                time : '',                                  //  服务器时间
+                // dataJson : '',                           //  时间json
                 isReduce : 'wx',
                 options : [
                     {
@@ -221,6 +221,9 @@
                     user_id : localStorage.userId
                 })
                 this.$indicator.close();
+                if (data.code === 44) {
+                    this.$router.push({name : 'home'});
+                }
                 this.address = {
                     name : data.addr.name,
                     phone_number : data.addr.phone_number,
@@ -231,7 +234,7 @@
                     price :data.money+"",
                     coupon : [...data.totals_list,...data.totals.list]
                 },
-                this.dl_type = data.addr.dl_type === 0 ? '1' : data.addr.dl_type;
+                this.dl_type = data.addr.dl_type === 0 ? '1' : data.addr.dl_type+'';
                 this.hongbao = data.coup.money;
                 this.category = JSON.stringify(data.category);
                 this.totalMoney = data.total_money;
@@ -243,7 +246,7 @@
                 let that = this,
                     data = '[';
                 for(let i = 1;i < 8; i++){
-                    data += ["{\"id\": \""+this.getNowDate(i,0)+"\",\"value\": \""+this.getNowDate(i,1)+"\",\"child\": [{\"id\": \"0\",\"value\": \"10:00\",\"child\": [{\"id\": \"0\",\"value\": \"推荐\"}]},{\"id\": \"0\",\"value\": \"8:00\"},{\"id\": \"0\",\"value\": \"8:30\"},{\"id\": \"0\",\"value\": \"9:00\"},{\"id\": \"0\",\"value\": \"9:30\"},{\"id\": \"0\",\"value\": \"10:00\"},{\"id\": \"0\",\"value\": \"10:30\"},{\"id\": \"0\",\"value\": \"11:00\"},{\"id\": \"0\",\"value\": \"11:30\"}]}"];
+                    data += ['{"id": "'+this.getNowDate(i,0)+'","value": "'+this.getNowDate(i,1)+'","child": [{"id": 0,"value": "10:00","child": [{"id": 0,"value": "推荐"}]},{"id": 0,"value": "8:00"},{"id": 0,"value": "8:30"},{"id": 0,"value": "9:00"},{"id": 0,"value": "9:30"},{"id": 0,"value": "10:00"},{"id": 0,"value": "10:30"},{"id": 0,"value": "11:00"},{"id": 0,"value": "11:30"}]}'];
                     if( i < 7 ) data += ",";
                 }
                 data += ']';
@@ -282,12 +285,9 @@
                 mon = d.getMonth() + 1;
                 day = d.getDate();
                 if (show == 1) {
-                    if (n == 1) 
-                        str = "明天";
-                    else if (n == 2) 
-                        str = "后天";
-                    else 
-                        str = (mon < 10 ? ('0' + mon) : mon) + "月" + (day < 10 ? ('0' + day) : day)+"日";
+                    if (n == 1)  str = "明天";
+                    else if (n == 2)  str = "后天";
+                    else str = (mon < 10 ? ('0' + mon) : mon) + "月" + (day < 10 ? ('0' + day) : day)+"日";
                 }else {
                     str = year + "-" + (mon < 10 ? ('0' + mon) : mon) + "-" + (day < 10 ? ('0' + day) : day);
                 }
@@ -318,7 +318,7 @@
                             // 成功生成订单，跳到支付页面
                             this.$store.state.orderTime = '请选择送达时间';
                             this.$store.state.orderMsg = '';
-                            this.$router.push({name : 'my'});
+                            window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${res.data.order_group_id}`
                         }
                     })
                     this.$indicator.close();

@@ -20,7 +20,7 @@
         },
         data() {
             return {
-                indexType: ''
+                indexType: 0
             }
         },
         activated() {
@@ -31,15 +31,11 @@
                 })
             }
         },
-        watch : {
-            indexType(n,o) {
-                this.$emit('order',this.indexType);
-            }
-        },
         methods: {
             changeIndex(index) {
                 this.indexType = index;
                 this.$refs.scroll.style.left = this.indexType*20 +'%';
+                this.$emit('order',this.indexType);
             }
         },
     }

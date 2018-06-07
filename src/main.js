@@ -51,7 +51,7 @@ Vue.use(vueg, router, {
 
 // import  Velocity from 'velocity-animate'
 router.beforeEach(async (to, from, next) => {
-  if (to.path === from.path) {} else {
+  if (to.path !== from.path) {
     Vue.prototype.$indicator.open('努力加载中...');
     if (!store.state.isLogin) {
       if (to.meta.isLogin) {

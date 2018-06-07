@@ -83,7 +83,7 @@
             },
             initShare() {
                 if (this.$device === 'wechat') {
-                    const url = `https://scw.new.songcaiwa.cn/public/activepage/share-order.html#?orderId=${this.$route.params.groupId}`;
+                    const url = `${process.env.BASE_URL}/public/activepage/share-order.html#?orderId=${this.$route.params.groupId}`;
                     this.wxShare('快来围观我今天买了什么菜！','送菜蛙！',url,'https://scw.new.songcaiwa.cn/public/static/home/images/scw_icon.png',(res)=> {
                         if (res === 'shareSuccess') {
                             this.$toast('分享成功！')
@@ -95,7 +95,7 @@
             },
             // 立即支付
             payOrder() {
-                
+                window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${this.$route.params.groupId}`
             },
             // 分享订单
             shareOrder() {

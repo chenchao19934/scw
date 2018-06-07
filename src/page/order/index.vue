@@ -1,6 +1,8 @@
 <template>
     <div style="padding-top:82px;background-color:#f0f0f0">
-        <TopNav titles="我的订单"></TopNav>
+        <TopNav titles="我的订单"
+                :isConfirm="true"
+                @backs="unitBack"></TopNav>
         <TopList :arr="navList"
                  @order="changeNavIndex"></TopList>
         <div ref="list" 
@@ -70,7 +72,7 @@
                 this.listHeight = document.documentElement.clientHeight - 80 + 'px';
             })
         },
-        beforeRouteLeave(to, from, next) { 
+        beforeRouteLeave(to, from, next) {
             if (to.name === 'OrderDetails') {
                 from.meta.isBack = true;
             }else {
@@ -82,6 +84,7 @@
             if (!this.$route.meta.isBack) {
                 this.reset();
                 this.type = this.$route.params.type;
+                this.loadMore();
             }
         },
         methods: {
@@ -173,6 +176,9 @@
             // 关闭联系配送员弹窗
             closeMask() {
                 this.maskShow = false;
+            },
+            unitBack() {
+                this.$router.push({name : 'my'})
             }
         },
     }

@@ -14,7 +14,7 @@
         <div class="wx-orderItem__btn" v-if="orderArr.state === 10">
             <span>联系客服</span>
             <span v-if="orderArr.pay_type != 30" @click.stop="cancels(orderArr.order_group_id)">取消订单</span>
-            <span class="btn-green">立即支付</span>
+            <span class="btn-green" @click.stop="payOrder(orderArr.order_group_id)">立即支付</span>
         </div>
         <div class="wx-orderItem__btn" v-if="orderArr.state === 20">
             <span>联系客服</span>
@@ -55,6 +55,10 @@
             },
             reminOrder(id) {
                 this.$emit('remin',id)
+            },
+            payOrder(id) {
+                console.warn(id);
+                window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${id}`
             }
         },
     }

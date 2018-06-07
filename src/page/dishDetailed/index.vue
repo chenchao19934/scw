@@ -304,6 +304,9 @@
             },
             shareDish() {
                 // 打开微信分享蒙版
+                if (this.$device === 'wechat') {
+                    this.$store.state.isShowMask = true;
+                }
             },
             // 右上角导航
             toNav() {

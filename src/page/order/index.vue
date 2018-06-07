@@ -2,7 +2,7 @@
     <div style="padding-top:82px;background-color:#f0f0f0">
         <TopNav titles="我的订单"></TopNav>
         <TopList :arr="navList"
-                 @order="nowOredr"></TopList>
+                 @order="changeNavIndex"></TopList>
         <div ref="list" 
                 :style="{ height: listHeight, overflow: 'scroll', 'overflow-x': 'hidden'}">
             <ul 
@@ -82,20 +82,14 @@
             if (!this.$route.meta.isBack) {
                 this.reset();
                 this.type = this.$route.params.type;
-                this.initPage();
             }
         },
         methods: {
-            nowOredr(index) {
+            // 改变导航
+            changeNavIndex(index) {
                 this.reset();
                 this.type = index;
-                this.initPage();
-            },
-            async initPage() {
-                this.$indicator.open('加载中...');
-                this.list = await order({user_id : localStorage.userId,page : this.count,type : this.type});
-                this.count++;
-                this.$indicator.close();
+                this.loadMore();
             },
             // 加载更多
             async loadMore() {
@@ -141,7 +135,6 @@
             },
             // 联系配送员
             conOrder(id,phone) {
-                console.log(phone);
                 this.contactPhone = phone;
                 this.maskShow = true;
             },

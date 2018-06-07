@@ -5,7 +5,8 @@
             <!-- <mt-field label="" placeholder="请输入您要搜索的商品" v-model="username"></mt-field> -->
             <input type="text" placeholder="请输入您要搜索的商品" 
                                 @keyup.enter="setHistory"
-                                v-model="searchValue">
+                                v-model="searchValue"
+                                v-focus>
         </div>
         <HotSearch :hotList="goodsList" 
                     @search="searchHot"></HotSearch>

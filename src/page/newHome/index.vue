@@ -51,7 +51,6 @@
         },
         activated() {
             const paths = window.location.hash;
-            console.log(paths);
             if(paths.indexOf('home') >= 0) {
                 this.chooseBar = '0';
             }else if(paths.indexOf('list') >= 0) {
@@ -62,14 +61,8 @@
         },
         created() {
             const paths = window.location.hash;
-            if(paths.indexOf('home') >= 0) {
-                this.chooseBar = '0';
-            }else if(paths.indexOf('list') >= 0) {
-                this.chooseBar = '1';
-            }else if(paths.indexOf('cark') >= 0) {
+            if(paths.indexOf('cark') >= 0) {
                 this.chooseBar = '2';
-            }else if(paths.indexOf('my') >= 0) {
-                this.chooseBar = '3';
             }
         },
         methods : {

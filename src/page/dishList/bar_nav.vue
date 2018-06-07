@@ -44,7 +44,7 @@
         },
         methods : {
             scrollToLocatin(index,id,pid) {
-                console.log(id);
+                window.scrollTo(0,0);
                 this.scrollTo(this.barItem, index);
                 if (id == 'all') {
                     this.$emit('getSeconData',pid,index,'all');

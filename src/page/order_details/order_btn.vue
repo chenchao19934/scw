@@ -13,28 +13,13 @@
 
         <mt-button size="small" 
                     type="primary" 
-                    @click.native="evalOrder"
+                    @click.native="payOrder"
                     v-if="state == 10">立即支付</mt-button>
 
         <mt-button size="small" 
-                    type="primary" 
-                    @click.native="evalOrder"
-                    v-if="state == 40">评价订单</mt-button>
-
-        <mt-button size="small" 
                     type="danger" 
-                    @click.native="evalOrder"
+                    @click.native="remindOrder"
                     v-if="state == 20 || state == 30 || state == 31">提醒送单</mt-button>
-
-        <mt-button size="small" 
-                    type="danger" 
-                    @click.native="evalOrder"
-                    v-if="(state == 20 || state == 30) && payType != 30">取消订单</mt-button>
-
-        <mt-button size="small" 
-                    type="danger" 
-                    @click.native="deleteOrder"
-                    v-if="state == 50 || state == 60 || state == 80 || state == 110">删除订单</mt-button>
     </div>
 </template>
 
@@ -45,15 +30,22 @@
             payType : Number
         },
         methods: {
+            // 立即支付
+            payOrder() {
+                this.$emit("pay");
+            },
+            // 分享订单
             shareOrder() {
                 this.$emit("share");
             },
+            // 评价订单
             evalOrder() {
                 this.$emit("eval");
             },
-            deleteOrder() {
-                this.$emit("delete");
-            },
+            // 提醒送单
+            remindOrder() {
+                this.$emit("remind");
+            }
         },
     }
 </script>

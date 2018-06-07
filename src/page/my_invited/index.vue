@@ -88,7 +88,9 @@
                 }
             },
             share() {
-                
+                if (this.$device === 'wechat') {
+                    this.$store.state.isShowMask = true;
+                }
             }
         },
     }

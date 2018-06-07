@@ -4,12 +4,14 @@
 			<router-view v-transition style="min-height:100vh" v-if="$route.meta.keepAlive"></router-view>
 		</keep-alive>
 		<router-view v-transition style="min-height:100vh" v-if="!$route.meta.keepAlive"></router-view>
-		<!-- <router-view v-transition style="min-height:100vh"></router-view> -->
+		<div class="shareMask" 
+				@click.stop.prevent="closeMask"
+				v-if="isShowMask"></div>
 	</div>
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import {initCark,addressName} from './api/newService';
 export default {
 	name: "app",
@@ -34,6 +36,11 @@ export default {
 	},
 	created() {
 		this.initCark();
+	},
+	computed: {
+		...mapState([
+			'isShowMask'
+		])
 	},
 	methods: {
 		initCark() {
@@ -61,6 +68,9 @@ export default {
 				}
 			}
 		},
+		closeMask() {
+			this.$store.state.isShowMask = false;
+		}
 	},
 };
 </script>
@@ -290,5 +300,17 @@ export default {
 	.mint-radiolist-label {
 		text-align: left;
 	}
+}
+.shareMask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99999;
+	background: #000 url("./assets/image/share_to_wx.png")center no-repeat;
+	background-size: cover;
+	background-position-y: 20px;
+	opacity: 0.6;
 }
 </style>

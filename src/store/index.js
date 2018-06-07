@@ -23,6 +23,8 @@ const store = new Vuex.Store({
 		orderMsg : '',
 		// 订单选择配送方式
 		orderDlType : '1',
+		// 显示分享蒙版
+		isShowMask : false,
 
 		dish : {
 			leftId : 'fdf6f19b84ee462d9849b5e5db61b24f'

@@ -726,6 +726,15 @@ export const orderDetial = ({
     method,
     url : `${apiUrl}${url}/order_id/${order_id}`
 })
+// 评价订单
+export const evalOrder = ({
+    method = 'get',
+    url = '/order/dictionaries_next_order',
+    group_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/group_id/${group_id}`
+})
 
 // 微信获取config信息
 export const getConfig = ({

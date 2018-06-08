@@ -21,6 +21,7 @@
                                 @delOrder="deleteOrder"
                                 @canOrder="cancelOrder"
                                 @remin="reminder"
+                                @eval="evalOrder"
                                 :orderArr="x"></OrderItem>
                     <p class="page-infinite-loading"
                         v-show="loading">
@@ -172,6 +173,10 @@
                 }).then(res => {
                     this.$toast(res.message);
                 })
+            },
+            // 评价订单
+            evalOrder(id) {
+                this.$router.push({name : 'OrderEval',params : {groupId : id}})
             },
             // 关闭联系配送员弹窗
             closeMask() {

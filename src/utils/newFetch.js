@@ -6,8 +6,8 @@ import {
 	Indicator
 } from 'mint-ui';
 
-const baseURL = 'http://scw.new.songcaiwa.cn:8080';
-// const baseURL = 'https://scw.new.songcaiwa.cn';
+// const baseURL = 'http://scw.new.songcaiwa.cn:8080';
+const baseURL = 'https://scw.new.songcaiwa.cn';
 
 // 创建axios实例
 const service = axios.create({

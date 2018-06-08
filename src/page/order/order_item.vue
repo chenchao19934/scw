@@ -27,7 +27,7 @@
         <div class="wx-orderItem__btn" v-if="orderArr.state === 40">
             <span>联系客服</span>
             <span class="btn-green" @click.stop="contact(orderArr.order_group_id,orderArr.phone)">联系配送员</span>
-            <span class="btn-green">评价送分</span>
+            <span class="btn-green" @click.stop="eval(orderArr.order_group_id)">评价送分</span>
         </div>
         <div class="wx-orderItem__btn" v-if="orderArr.state >= 50 && orderArr.state!=100">
             <span>联系客服</span>
@@ -55,6 +55,9 @@
             },
             reminOrder(id) {
                 this.$emit('remin',id)
+            },
+            eval(id) {
+                this.$emit('eval',id)
             },
             payOrder(id) {
                 console.warn(id);

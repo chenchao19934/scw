@@ -41,6 +41,7 @@ const LoginExit = () => import('@/page/login_exit/index');
 // 订单
 const Order = () => import('@/page/order/index');
 const OrderDetails = () => import('@/page/order_details/index');
+const OrderEval = () => import('@/page/order_eval/index');
 
 // 购物车
 const cark = ()=> import('@/page/newHome/cark/index');
@@ -350,6 +351,15 @@ export default new Router({
 				keepAlive : false,
 				isLogin : true
 			}
+		},
+		{
+			path : '/OrderEval/:groupId',
+			name : 'OrderEval',
+			component : OrderEval,
+			meta : {
+				keepAlive : false,
+				isLogin : true
+			}	
 		},
 		/* 其他非法路由 */
 		{

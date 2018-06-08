@@ -105,7 +105,7 @@
             },
             // 评价订单
             evalOrder() {
-                
+                this.$router.push({name : 'OrderEval',params : {groupId : this.$route.params.groupId}})
             },
             // // 删除订单
             // deleteOrder() {

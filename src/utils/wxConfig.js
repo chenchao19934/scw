@@ -81,4 +81,22 @@ if (Vue.prototype.$device === 'wechat') {
             })
         })
     }
+    Vue.prototype.takeQRCode = callback => {
+        if (typeof(callback) !== 'function') return;
+        wx.ready(() => {
+            wx.scanQRCode({
+                desc: 'scanQRCode desc',
+                needResult: 0,
+                scanType: ["qrCode","barCode"],
+                success : res => {
+                    callback(res);
+                },
+                error: function(res){
+                    if(res.errMsg.indexOf('function_not_exist') > 0){
+                        alert('版本过低请升级')
+                    }
+                }
+            })
+        })
+    }
 }

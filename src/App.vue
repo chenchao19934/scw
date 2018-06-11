@@ -41,7 +41,7 @@ export default {
                     	localStorage.setItem("locationName",data);
 					})
 				}else {
-					
+					this.$toash('定位失败，请打开微信定位功能！');
 				}
 			});
 		}

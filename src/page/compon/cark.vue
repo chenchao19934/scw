@@ -161,7 +161,7 @@
         .wx-addcark {
             opacity: 0;
             left: 50%;
-            top: 0;
+            top: 50%;
             width : 100%;
             height: 100%;
             transform: translate3d(-50%,-50%,0);

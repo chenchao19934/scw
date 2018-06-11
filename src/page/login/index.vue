@@ -2,50 +2,27 @@
     <div class="wx-login">
         <TopNav></TopNav>
         <div class="wx-login__swipers">
-            <mt-swipe 
-                    :show-indicators="false" 
-                    :continuous="false" 
-                    :auto="0">
-                <mt-swipe-item>
-                    <InputItem type="text" 
-                                placeholder="请输入手机号" 
-                                :length=11
-                                v-model="phone">
-                        <span slot="img">
-                            <img src="../../assets/image/icon-home-person.png" alt="">
-                        </span>
-                    </InputItem>
-                    <InputItem type="text" 
-                                placeholder="请输入验证码" 
-                                :length=4
-                                v-model="code">
-                        <span slot="img">
-                            <img src="../../assets/image/icon-message.png" alt="">
-                        </span>
-                        <em slot="code" @click.prevent="getCode">{{codeMsg}}</em>
-                    </InputItem>
-                    <p class="login-txt">首次用手机号登录将自动为您注册</p>
-                    <div class="login-btn">
-                        <mt-button type="primary" size="large" @click.native="Login">登录</mt-button>
-                    </div>
-                </mt-swipe-item>
-                <mt-swipe-item>
-                    <InputItem type="text" placeholder="手机号/用户名/账号">
-                        <span slot="img">
-                            <img src="../../assets/image/icon-home-person.png" alt="">
-                        </span>
-                    </InputItem>
-                    <InputItem type="password" placeholder="请输入密码">
-                        <span slot="img">
-                            <img src="../../assets/image/icon-password.png" alt="">
-                        </span>
-                    </InputItem>
-                    <p class="login-txt">忘记密码？</p>
-                    <div class="login-btn">
-                        <mt-button type="primary" size="large" @click.native="Login">登录</mt-button>
-                    </div>
-                </mt-swipe-item>
-            </mt-swipe>
+            <InputItem type="text" 
+                        placeholder="请输入手机号" 
+                        :length=11
+                        v-model="phone">
+                <span slot="img">
+                    <img src="../../assets/image/icon-home-person.png" alt="">
+                </span>
+            </InputItem>
+            <InputItem type="text" 
+                        placeholder="请输入验证码" 
+                        :length=4
+                        v-model="code">
+                <span slot="img">
+                    <img src="../../assets/image/icon-message.png" alt="">
+                </span>
+                <em slot="code" @click.prevent="getCode">{{codeMsg}}</em>
+            </InputItem>
+            <p class="login-txt">首次用手机号登录将自动为您注册</p>
+            <div class="login-btn">
+                <mt-button type="primary" size="large" @click.native="Login">登录</mt-button>
+            </div>
         </div>
     </div>
 </template>

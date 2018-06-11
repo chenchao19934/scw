@@ -50,6 +50,9 @@ const carkCouponList = ()=> import('@/page/cark_redPack/index');
 const carkOrder = ()=> import('@/page/cark_settlement/index');
 const carkAddress = () => import('@/page/my_location/choose_cark');
 
+// 活动外链
+const ActiveLink = () => import('@/page/web_link/index');
+
 Vue.use(Router);
 
 export default new Router({
@@ -359,6 +362,16 @@ export default new Router({
 			meta : {
 				keepAlive : false,
 				isLogin : true
+			}	
+		},
+		// 活动外链
+		{
+			path : '/ActiveLink/:urls',
+			name : 'ActiveLink',
+			component : ActiveLink,
+			meta : {
+				keepAlive : false,
+				isLogin : false
 			}	
 		},
 		/* 其他非法路由 */

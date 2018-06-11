@@ -119,19 +119,31 @@
                         phone : this.phone,
                         code : res
                     }).then(res => {
-                        console.log(res);
                         this.$toast(res.message);
                     })
                 });
             },
             // 登录
             async Login() {
-                localStorage.userId = 'ee363d1cdb1d4e45a118cce9d9eb7ced';
-                localStorage.user_logo = 'https://scwnew.oss-cn-shenzhen.aliyuncs.com/20180123113731faceIcon.png';
-                localStorage.user_name = '13049498409';
-                localStorage.user_nick_name = '如guo没有如果';
-                this.$store.commit('setLoginState',true);
-                
+                if (this.phone === '' || this.code === '' || this.code.length !== 4) {
+                    this.$toast("请填写正确的手机号或验证码！");
+                }else {
+                    await getUser({
+                        phone : this.phone,
+                        code : this.code
+                    }).then(res => {
+                        if (res.user_name) {
+                            localStorage.logo = res.user_logo;
+                            localStorage.userId = res.user_id;
+                            localStorage.phone = res.user_name;
+                            localStorage.userName = res.user_nick_name;
+                            this.$store.commit('setLoginState',true);
+                            this.$back(this.$router);
+                        }else {
+                            this.$toast(res.message)
+                        }
+                    })
+                }
                 // await addLocalToCark({
                 //     user_id : localStorage.userId,
                 //     list : JSON.parse(localStorage.ShoppingCart)
@@ -140,7 +152,6 @@
                 //         localStorage.ShoppingCart = '[]';
                 //     }
                 // })
-                this.$back(this.$router);
             }
         }
     }

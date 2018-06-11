@@ -104,15 +104,19 @@ export default {
         //  购物车本地缓存
         carkLocal(obj) {
             if(this.$store.state.isLogin) {
-                addToCark({
-                    goods_id : obj.goods_id,
-                    user_id : localStorage.userId
-                }).then(res=> {
-                    if (res.message != "") {
-                        this.$toast(res.message);
-                    }
-                    this.$store.state.shopCarkLenth = res.number
-                })
+                if (!this.$store.state.isBindPhone) {
+                    this.$store.state.isShowBindPhone = true;
+                }else {
+                    addToCark({
+                        goods_id : obj.goods_id,
+                        user_id : localStorage.userId
+                    }).then(res=> {
+                        if (res.message != "") {
+                            this.$toast(res.message);
+                        }
+                        this.$store.state.shopCarkLenth = res.number
+                    })
+                }
             }else {
                 let count = 0;
                 if (localStorage.ShoppingCart && localStorage.ShoppingCart !== '[]') {

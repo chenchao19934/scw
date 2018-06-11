@@ -414,6 +414,17 @@ export const bindPhone = ({
     method,
     url : `${apiUrl}${url}/user_id/${user_id}`,
 })
+// 绑定手机号
+export const bingToPhone = ({
+    method = 'get',
+    url = '/user/merge_user',
+    user_id,
+    phone,
+    code
+})  => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}/phone/${phone}/code/${code}`,
+})
 
 // 购物车提交详情
 export const shopCarkOrder =({
@@ -735,6 +746,16 @@ export const evalOrder = ({
     method,
     url : `${apiUrl}${url}/group_id/${group_id}`
 })
+// 提交评价订单
+export const evalCommit = ({
+    method = 'post',
+    url = '/order/order_comment/',
+    data
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}`,
+    data : data
+})
 
 // 微信获取config信息
 export const getConfig = ({
@@ -754,4 +775,13 @@ export const addressName = ({
 }) => newFetch({
     method,
     url : `${apiUrl}${url}?lat=${lat}&lng=${lng}`
+})
+// 微信照片上传
+export const upPhoto = ({
+    method = 'get',
+    url = '/wechat/save_media',
+    serverid
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}?serverid=${serverid}`
 })

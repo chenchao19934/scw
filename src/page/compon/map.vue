@@ -6,7 +6,6 @@
 </template>
 
 <script>
-    import {mapGetters,mapMutations} from 'vuex';
     export default {
         data() {
             return {
@@ -15,19 +14,11 @@
                 from : ''
             }
         },
-        computed : {
-            ...mapGetters([
-                'address'
-            ])
-        },
         activated() {
             this.time = 1;
             this.from = this.$route.params.from
         },
         methods: {
-            ...mapMutations([
-                'setLocation'
-            ]),
             loadiframe() {
                 let iframe = document.getElementById('getAddress').contentWindow;
                 iframe.postMessage('hello', 'https://m.amap.com/picker/');
@@ -35,15 +26,12 @@
                     if (this.time === 1) {
                         let lat = e.data.location.split(",")[1],
                             lng = e.data.location.split(",")[0];
-                        this.setLocation({
-                            detail_address : e.data.name,
-                            location : e.data.location
-                        });
                         switch (this.from) {
                             case 'home' : 
-                                localStorage.locationName = e.data.name;
                                 localStorage.setItem("lat",lat);
                                 localStorage.setItem("lon",lng);
+                                localStorage.locationName = e.data.name;
+                                this.$store.state.addressName = e.data.name;
                                 this.$router.push({name : this.from})
                                 break;
                             default :

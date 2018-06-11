@@ -7,6 +7,7 @@
         <mt-cell is-link 
                  v-for="x in exchangeList" 
                  :key="x.id"
+                 v-if="goodsList.length !== 0 || giftList.length !== 0"
                  @click.native="$router.push({name : 'CarkChange', params : {money : totalMoney}})">
             <span>{{x.title}}</span>
             <img slot="icon" src="../../../assets/image/icon/my-change.png" width="24" height="24">

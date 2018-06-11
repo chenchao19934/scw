@@ -63,9 +63,9 @@
                 await getUserInfo({user_id : localStorage.userId}).then(res=> {
                     this.userInfo = res.date;
                     localStorage.userId = res.date.user_id;
-                    localStorage.user_logo = res.date.user_logo;
-                    localStorage.user_name = res.date.user_name;
-                    localStorage.user_nick_name = res.date.user_nick_name;
+                    localStorage.logo = res.date.user_logo;
+                    localStorage.phone = res.date.user_name;
+                    localStorage.userName = res.date.user_nick_name;
                 })
             },
             setUserSex(actions,index) {
@@ -89,9 +89,9 @@
             },
             exitLogin() {
                 localStorage.removeItem("userId");
-                localStorage.removeItem("user_logo");
-                localStorage.removeItem("user_name");
-                localStorage.removeItem("user_nick_name");
+                localStorage.removeItem("logo");
+                localStorage.removeItem("phone");
+                localStorage.removeItem("userName");
                 this.$store.commit('setLoginState', false);
                 this.$back(this.$router);
             }

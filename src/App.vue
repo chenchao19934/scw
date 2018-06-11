@@ -7,19 +7,30 @@
 		<div class="shareMask" 
 				@click.stop.prevent="closeMask"
 				v-if="isShowMask"></div>
+		<MaskBox  :isShow="true"
+				  v-if="isShowBindPhone"
+				  @close="closeMask">
+			<BindPhone slot="user"></BindPhone>
+		</MaskBox>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import {initCark,addressName} from './api/newService';
+
+import MaskBox from './page/compon/mask';
+import BindPhone from './components/bind_phone';
 export default {
 	name: "app",
+	components: {
+		MaskBox,
+		BindPhone
+	},
 	beforeCreate () {
 		if (this.$device === 'wechat') {
 			this.wxLocation((res)=> {
 				if (res !== 'cancel') {
-					console.log(res);
 					localStorage.setItem("lat",res.latitude);
                     localStorage.setItem("lon",res.longitude);
 					let data = addressName({
@@ -27,6 +38,7 @@ export default {
 						lng : res.longitude
 					}).then(data => {
 						this.$store.state.addressName = data;
+                    	localStorage.setItem("locationName",data);
 					})
 				}else {
 					
@@ -39,7 +51,8 @@ export default {
 	},
 	computed: {
 		...mapState([
-			'isShowMask'
+			'isShowMask',
+			'isShowBindPhone'
 		])
 	},
 	methods: {

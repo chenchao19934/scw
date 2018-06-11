@@ -47,8 +47,8 @@
         activated() {
             this.restPage();
             if (this.$store.state.isLogin) {
-                this.uInfo.logo = localStorage.user_logo;
-                this.uInfo.userName = localStorage.user_nick_name;
+                this.uInfo.logo = localStorage.logo;
+                this.uInfo.userName = localStorage.userName;
             }else {
                 this.uInfo = {
                     logo : 'static/login_default_img.png',

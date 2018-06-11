@@ -1,7 +1,7 @@
 import Vue from 'vue'
 // 微信js-sdk-api
 import wx from 'weixin-js-sdk'
-import { getConfig } from '../api/newService'
+import { getConfig,upPhoto } from '../api/newService'
 
 // 判断当前环境
 if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger") {
@@ -77,7 +77,18 @@ if (Vue.prototype.$device === 'wechat') {
                 count: 1,
                 sizeType: ['compressed'], 
                 sourceType: ['album','camera'],
-                success : res => {callback(res.localIds)}
+                success : res => {
+                    wx.uploadImage({
+                        localId: res.localIds[0].toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (data) {
+                            upPhoto({serverid : `scw${data.serverId}`}).then(data => {
+                                callback(data);
+                            })
+                        }
+                    });
+
+                }
             })
         })
     }

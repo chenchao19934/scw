@@ -53,7 +53,7 @@
                     index : '产品',
                     suggIndex : "建议",
                     imgData : [],
-                    user_id : localStorage.userId
+                    userId : localStorage.userId
                 }
             }
         },
@@ -75,10 +75,7 @@
             takePhotos() {
                 if (this.$device === 'wechat') {
                     this.takePhoto(res=> {
-                        for(let i = 0; i<res.length ; i++) {
-                            this.message.imgData.push(res[i]);
-                        }
-                        console.log(this.message.imgData);
+                        this.message.imgData.push(res);
                     })
                 }
             }
@@ -116,7 +113,7 @@
             flex-basis : rem(170);
             height : rem(170);
             margin : 0 rem(2) rem(10);
-            background-color: red;
+            background-color: #fff;
             overflow: hidden;
             img {
                 display: block;

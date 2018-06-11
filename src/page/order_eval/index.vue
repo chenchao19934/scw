@@ -5,7 +5,7 @@
                 v-for="(x,index) in list"
                 :key="index">
             <div class="wx-eval__head">
-                <h2 class="ellipsis" @click.stop="showDish(index)">{{x.name}}{{x.showState}}</h2>
+                <h2 class="ellipsis">{{x.name}}</h2>
                 <Start :count.sync="x.score"
                        :isClick="true"></Start>
             </div>
@@ -45,7 +45,7 @@
 <script>
     import TopNav from '@/page/compon/top_nav';
     import Start from '@/page/compon/rate_start';
-    import { evalOrder } from "@/api/newService";
+    import { evalOrder,evalCommit } from "@/api/newService";
     export default {
         components: {
             TopNav,
@@ -68,11 +68,12 @@
         methods: {
             async initPage() {
                 await evalOrder({group_id : this.$route.params.groupId}).then(res => {
-                    this.list = res.date;
-                    this.list.forEach(element => {
+                    let data = res.date;
+                    data.forEach(element => {
                         element.imgArr = new Array();
                         element.score = 5;
                     });
+                    this.list = data;
                 })
             },
             chooseTag(score,index,tagIndex) {
@@ -85,15 +86,24 @@
             // 拍照
             takePhotos(index) {
                 if (this.$device === 'wechat') {
-                    this.takePhoto(res => {
-                        for(let i = 0; i<res.length ; i++) {
-                            this.list[index].imgArr.push(res[i]);
-                        }
+                    this.takePhoto(res=> {
+                        this.list[index].imgArr.push(res);
                     })
                 }
             },
-            commitEval() {
+            async commitEval() {
                 console.log(this.list);
+                const data = await evalCommit({
+                    data : this.list
+                })
+                if (data.code === 200) {
+                    this.$toast("提交成功！");
+                    setTimeout(()=> {
+                        this.$back(this.$router);
+                    },2000)
+                }else {
+                    this.$toast(data.message);
+                }
             }
         },
     }
@@ -154,7 +164,7 @@
             flex-basis : rem(170);
             height : rem(170);
             margin : 0 rem(2) rem(10);
-            background-color: red;
+            background-color: #fff;
             overflow: hidden;
             img {
                 display: block;

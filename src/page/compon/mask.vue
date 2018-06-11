@@ -1,5 +1,7 @@
 <template>
-    <div class="wx-masks" :class="{'ani-open': isShow, 'ani-close' : !isShow}">
+    <div class="wx-masks" 
+         v-if="isShow"
+         :class="{'ani-open': isShow, 'ani-close' : !isShow}">
         <div class="wx-masks__box" @click="clo"></div>
         <div class="wx-masks__main">
             <slot name="user"></slot>
@@ -58,12 +60,12 @@
         transition: opacity 0.5s;
     }
 }
-// .ani-open .wx-masks__main {
-//     animation-name: anim-open;
-// }
-// .ani-close .wx-masks__main {
-// 	animation-name: anim-close;
-// }
+.ani-open .wx-masks__main {
+    animation: anim-open 0.5s;
+}
+.ani-close .wx-masks__main {
+	animation: anim-close 0.5s;
+}
 .ani-open .wx-masks__box {
     opacity: 1;
     pointer-events: auto;
@@ -72,12 +74,12 @@
     opacity: 1;
     pointer-events: auto;
 }
-// @keyframes anim-open {
-// 	0% { opacity: 0; -webkit-transform: scale3d(1.1, 1.1, 1); transform: scale3d(1.1, 1.1, 1); }
-// 	100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }
-// }
-// @keyframes anim-close {
-// 	0% { opacity: 1; }
-// 	100% { opacity: 0; -webkit-transform: scale3d(0.9, 0.9, 1); transform: scale3d(0.9, 0.9, 1); }
-// }
+@keyframes anim-open {
+	0% { opacity: 0; -webkit-transform: scale3d(1.1, 1.1, 1); transform: scale3d(1.1, 1.1, 1); }
+	100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }
+}
+@keyframes anim-close {
+	0% { opacity: 1; }
+	100% { opacity: 0; -webkit-transform: scale3d(0.9, 0.9, 1); transform: scale3d(0.9, 0.9, 1); }
+}
 </style>

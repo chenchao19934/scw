@@ -1,7 +1,7 @@
 <template>
     <div class="wx-location">
         <div class="wx-location__title ellipsis" @click="$router.push({name : 'homeAddress'})">{{title}}▼</div>
-        <div class="wx-location__icon"></div>
+        <div class="wx-location__icon" @click="$router.push({name : 'search'})"></div>
         <div class="wx-location__icon"></div>
     </div>
 </template>

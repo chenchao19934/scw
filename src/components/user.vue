@@ -45,15 +45,12 @@
 </script>
 
 <style lang="scss" scoped>
-input::-webkit-input-placeholder{
-    color:#fff;
-}
 @include b(loginForm) {
     position: relative;
-    margin: rem(60) rem(60) 0;
+    margin-bottom: rem(15);
     border-radius: 8px;
     overflow: hidden;
-    background: #000;
+    background: #fff;
     opacity: 1;
     @include e(labels) {
         display: flex;
@@ -71,23 +68,20 @@ input::-webkit-input-placeholder{
         }
         em {
             position: absolute;
-            right: 10px;
-            top: 9px;
-            width: 95px;
-            height: 26px;
-            line-height: 26px;
+            right: rem(10);
+            top: rem(20);
+            width: rem(170);
+            height: rem(52);
+            line-height: rem(52);
             text-align: center;
-            color: #fff;
+            color: #abd13e;
             background: transparent;
-            border: 1px solid #fff;
-            border-radius: 4px;
-            font-size: 12px;
+            font-size: rem(24);
             z-index: 10;
         }
         input {
             border: none;
             flex: none;
-            color: #fff;
             padding-left: 10px;
             height: 34px;
             vertical-align: middle;

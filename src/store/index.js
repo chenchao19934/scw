@@ -11,8 +11,9 @@ const store = new Vuex.Store({
 		isLogin : null,
 		// 购物车数量
 		shopCarkLenth : 0,
-		// 是否绑定手机号 true未绑定
+		// 是否绑定手机号 true已绑定
 		isBindPhone : false,
+		isShowBindPhone : false,
 		// 礼盒数量
 		giftCount : 0,
 		// 地址
@@ -35,10 +36,6 @@ const store = new Vuex.Store({
 			levelTitle : '新鲜水果',
 			levelTwo: 'fdf6f19b84ee462d9849b5e5db61b24f',
 			pageOffset : 0
-		},
-		locationName : {
-			detail_address : '' || '请选择小区或大厦等',
-			location : ''
 		}
 	},
 	getters: {
@@ -55,10 +52,9 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		async getBindPhone({commit},id) {
-			console.log(id);
 			let data = await bindPhone({ user_id : id }),
 				states;
-			data.code === 1310 ? states = false :states = true;
+			data.code === 1310 ? states = false : states = true;
 			commit('setBindPhone',states);
 		}
 	},
@@ -80,9 +76,6 @@ const store = new Vuex.Store({
 		},
 		setleftId(state, b) {
 			state.dish.leftId = b;
-		},
-		setLocation(state,b) {
-			state.locationName = b;
 		},
 		setLoginState(state,b) {
 			state.isLogin = b;

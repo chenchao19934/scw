@@ -74,7 +74,7 @@
             })
         },
         beforeRouteLeave(to, from, next) {
-            if (to.name === 'OrderDetails') {
+            if (to.name === 'OrderDetails' || to.name === 'OrderEval') {
                 from.meta.isBack = true;
             }else {
                 from.meta.isBack = false;

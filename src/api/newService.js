@@ -757,6 +757,15 @@ export const evalCommit = ({
     data : data
 })
 
+// 限时抢购
+export const rushToBuy = ({
+    method = 'get',
+    url = '/index/get_rob_goods'
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}`
+})
+
 // 微信获取config信息
 export const getConfig = ({
     method = 'get',

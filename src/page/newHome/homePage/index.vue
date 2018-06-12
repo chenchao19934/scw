@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="padding-bottom:10px">
         <topLocation :title="addressName"></topLocation>
         <topTab ref='bar' :barIndex="bars" 
                           @getSeconData="getSecon"
@@ -16,7 +16,23 @@
                     </div>
                     
                     <imgScroll :bannerList="bannerList"></imgScroll>
-                
+                    <div v-show="timeList.length !== 0">
+                        <div class="wx-flipDown">
+                            <div class="wx-flipDown__imgWrap">
+                                <img src="../../../assets/image/time_sell.jpg" alt="">
+                            </div>
+                            <div class="wx-flipDown__txt">{{statrTitle}}</div>
+                            <flip-countdown :deadline="timeDown"
+                                            @timeEnd="changeTime"></flip-countdown>
+                        </div>
+                        <div class="wx-flipGood">
+                            <TimeItem v-for="x in timeList" 
+                                        :key="x.id"
+                                        :isStart="statrSell" 
+                                        :goodItemList="x"></TimeItem>
+                        </div>
+                    </div>
+
                     <NewBar :newArr="meiriNews"></NewBar>
 
                     <HotSell :goodsList="goodsList" 
@@ -79,11 +95,13 @@
 <script>
     import topLocation from './top_location';
 
-    import {newHomeList, fruitList, vegeList, porkList, seafoodList, snacksList, milkList, coolfoodList} from '@/api/newService.js'
+    import {newHomeList, fruitList, vegeList, porkList, seafoodList, snacksList, milkList, coolfoodList, rushToBuy} from '@/api/newService.js'
     import {mapState} from 'vuex'
     import imgScroll from '@/page/compon/top_imgScroll';
-    
     import NewBar from '@/page/compon/scroll_new';
+
+    import FlipCountdown from '@/components/FlipCountdown';
+    import TimeItem from './time_item';
 
     import HotSell from '../compoments/first/index';
     import FruitSell from '../compoments/fruit/index';
@@ -111,7 +129,9 @@
             SeaFoodSell,
             SnacksSell,
             MildSell,
-            CoolFoodSell
+            CoolFoodSell,
+            FlipCountdown,
+            TimeItem
         },
         data() {
             return {
@@ -132,6 +152,11 @@
                 snack : [],
                 milk : [],
                 coolfood : [],
+                // 限时抢购
+                statrTitle : '',
+                timeDown : '0',
+                timeList : [],
+                statrSell :false
             }
         },
         computed : {
@@ -139,7 +164,8 @@
                 'addressName'
             ])
         },
-        async created() {
+        created() {
+            this.getRush();
             this.initPage();
         },
         watch : {
@@ -255,6 +281,27 @@
                     this.coolfood = res.data;
                 });
             },
+            // 限时抢购
+            async getRush() {
+                await rushToBuy({}).then(res => {
+                    if (res.length === 0) {
+                        this.timeList  = res;
+                    }else {
+                        this.timeList  = res.list;
+                        if (res.start_time > 0) {
+                            this.statrTitle = '即将开始';
+                            this.timeDown = res.start_time+'';
+                        }else {
+                            this.statrTitle = '距离结束';
+                            this.timeDown = res.end_time+'';
+                            this.statrSell = true;
+                        }
+                    }
+                })
+            },
+            changeTime() {
+                this.getRush();
+            }
         }
     }
 </script>
@@ -266,5 +313,29 @@
 }
 .mint-tab-container-item {
     min-height: 90vh;
+}
+@include b(flipGood) {
+    display: flex;
+    overflow: scroll;
+    overflow-y: hidden;
+}
+@include b(flipDown) {
+    display: flex;
+    padding: rem(20) rem(10);
+    @include e(txt) {
+        height: rem(66);
+        line-height: rem(66);
+        font-size: 0.48rem;
+        padding: 0 rem(10);
+    }
+    @include e(imgWrap) {
+        width: rem(225);
+        height: rem(66);
+        padding: rem(12) 0;
+        img {
+            display: block;
+            width:100%;
+        }
+    }
 }
 </style>

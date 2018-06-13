@@ -51,9 +51,11 @@
         </mt-cell>
 
         <ScrollItem :orderArr="couponList"
+                    v-if="couponList.length !== 0"
                     titles="可用优惠券商品"
                     :couponType="true"></ScrollItem>
         <ScrollItem :orderArr="uncouponList"
+                    v-if="uncouponList.length !== 0"
                     titles="不可用优惠券商品"
                     :couponType="false"></ScrollItem>
 
@@ -61,14 +63,14 @@
                  :actual="order.price"
                  :list="order.coupon"></PayList>
         
-        <div style="background-color:#fff;margin-top:10px">
+        <div style="background-color:#fff;margin-top:10px" v-if="couponList.length !== 0">
             <p class="listTit">可用优惠券共{{couponList.length}}种商品</p>
             <GoodItem v-for="(x,index) in couponList" 
                         :goodItemList="x"
                         :key="index"></GoodItem>
         </div>
 
-        <div style="background-color:#fff;margin-top:10px">
+        <div style="background-color:#fff;margin-top:10px" v-if="uncouponList.length !== 0">
             <p class="listTit">不可用优惠券共{{uncouponList.length}}种商品</p>
             <GoodItem v-for="(x,index) in uncouponList" 
                         :goodItemList="x"

@@ -64,7 +64,7 @@
     z-index:10;
     @include e(choose) {
         position: relative;
-        width : rem(260);
+        width : rem(250);
         padding : 6px 10px;
         span {
             position: absolute;
@@ -75,14 +75,13 @@
         }
     }
     @include e(total) {
-        width : rem(330);
+        width : rem(350);
         span {
             color: #ff8e00;
-            font-size: 16px;
+            font-size: 14px;
         }
         em {
             color: #717171;
-            margin-left: 5px;
             font-size: 14px;
         }
     }

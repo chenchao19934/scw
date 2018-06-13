@@ -27,6 +27,8 @@ const store = new Vuex.Store({
 		// 显示分享蒙版
 		isShowMask : false,
 
+		scrollTop : 0,
+
 		dish : {
 			leftId : 'fdf6f19b84ee462d9849b5e5db61b24f'
 		},

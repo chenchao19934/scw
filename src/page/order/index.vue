@@ -6,7 +6,8 @@
         <TopList :arr="navList"
                  @order="changeNavIndex"></TopList>
         <div ref="list" 
-                :style="{ height: listHeight, overflow: 'scroll', 'overflow-x': 'hidden'}">
+                :style="{ height: listHeight, overflow: 'scroll', 'overflow-x': 'hidden'}"
+                @scroll.passive="onScroll($event)">
             <ul 
                 v-infinite-scroll="loadMore"
                 infinite-scroll-disabled="loading"
@@ -78,6 +79,7 @@
                 from.meta.isBack = true;
             }else {
                 from.meta.isBack = false;
+                this.$store.state.scrollTop = 0;
             }
             next();  
         },
@@ -87,6 +89,7 @@
                 this.type = this.$route.params.type;
                 this.loadMore();
             }
+            this.$refs.list.scrollTop = this.$store.state.scrollTop;
         },
         methods: {
             // 改变导航
@@ -184,6 +187,9 @@
             },
             unitBack() {
                 this.$router.push({name : 'my'})
+            },
+            onScroll(event) {
+                this.$store.state.scrollTop = event.target.scrollTop;
             }
         },
     }

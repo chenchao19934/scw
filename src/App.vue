@@ -225,6 +225,9 @@ export default {
 .mint-tab-item-label {
   	font-size: 14px;
 }
+.mint-cell-value {
+	font-size: 14px;
+}
 .more-unit {
     position: relative;
     width: 100%;

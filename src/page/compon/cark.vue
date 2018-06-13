@@ -152,11 +152,12 @@
     @include e(buy) {
         position: relative;
         background-color: #abd13e;
+        width : 50%;
         p {
             padding: 0 15px;
             text-align: center;
             color: #ffffff;
-            font-size: 16px;
+            font-size: 14px;
         }
         .wx-addcark {
             opacity: 0;

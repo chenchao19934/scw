@@ -19,6 +19,10 @@ export default {
     methods : {
         // 无多规格加入购物车
         showMoveDotFun(showMoveDot,elLeft,elBottom,shop) {
+            if(shop.number === undefined) {
+                shop.number = 1;
+                shop.check = true;
+            }
             this.showMoveDot = [...this.showMoveDot, ...showMoveDot];
             this.elLeft = elLeft;
             this.elBottom = elBottom;

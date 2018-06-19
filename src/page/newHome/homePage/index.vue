@@ -7,10 +7,10 @@
         <mt-tab-container v-model="bars">
             <mt-tab-container-item id="0">
                 <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
-                    <div slot="top" class="mint-loadmore-top">
+                    <!-- <div slot="top" class="mint-loadmore-top">
                         <span v-show="topStatus !== 'loading'">{{topStatusType}}</span>
                         <span v-show="topStatus === 'loading'">刷新中</span>
-                    </div>
+                    </div> -->
                     
                     <imgScroll :bannerList="bannerList"></imgScroll>
                     <div v-show="timeList.length !== 0">

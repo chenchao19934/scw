@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="wx-login__nav">
-            <LoginNavItem v-for="(x,index) in itemObj" 
+            <LoginNavItem v-for="x in itemObj" 
                             :item="x"
                             :key="x.id"
                             @click.native="provide(x.id)"></LoginNavItem>

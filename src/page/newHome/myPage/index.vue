@@ -92,6 +92,9 @@
                     })
                 } else {
                     this.$toast("登录后才能参与签到！");
+                    setTimeout(() => {
+                        this.$router.push({name : 'Login'})
+                    }, 2000);
                 }
             },
             goPage(id) {

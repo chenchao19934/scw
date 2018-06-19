@@ -17,129 +17,127 @@
 <script>
 let interval = null
 export default {
-name: 'flipCountdown',
-props: {
-	deadline: {
-	type: String
+	name: 'flipCountdown',
+	props: {
+		deadline: {
+		type: String
+		},
+		stop: {
+		type: Boolean
+		}
 	},
-	stop: {
-	type: Boolean
-	}
-},
-data () {
-	return {
-		now: Math.trunc(new Date().getTime() / 1000),
-		date: null,
-		diff: 0,
-		timeData: [
-			{
-				current: 0,
-				previous: 0,
-				label: 'Days',
-				elementId: 'flip-card-days'
-			},
-			{
-				current: 0,
-				previous: 0,
-				label: 'Hours',
-				elementId: 'flip-card-hours'
-			},
-			{
-				current: 0,
-				previous: 0,
-				label: 'Minutes',
-				elementId: 'flip-card-minutes'
-			},
-			{
-				current: 0,
-				previous: 0,
-				label: 'Seconds',
-				elementId: 'flip-card-seconds'
+	data () {
+		return {
+			now: Math.trunc(new Date().getTime() / 1000),
+			date: null,
+			diff: 0,
+			timeData: [
+				{
+					current: 0,
+					previous: 0,
+					label: 'Days',
+					elementId: 'flip-card-days'
+				},
+				{
+					current: 0,
+					previous: 0,
+					label: 'Hours',
+					elementId: 'flip-card-hours'
+				},
+				{
+					current: 0,
+					previous: 0,
+					label: 'Minutes',
+					elementId: 'flip-card-minutes'
+				},
+				{
+					current: 0,
+					previous: 0,
+					label: 'Seconds',
+					elementId: 'flip-card-seconds'
+				}
+			]
+		}
+	},
+	computed: {
+		seconds () {
+			return Math.trunc(this.diff) % 60
+		},
+		minutes () {
+			return Math.trunc(this.diff / 60) % 60
+		},
+		hours () {
+			return Math.trunc(this.diff / 60 / 60) % 24
+		},
+		days () {
+			return Math.trunc(this.diff / 60 / 60 / 24)
+		}
+	},
+	watch: {
+		now (value) {
+			this.diff = this.now
+			if (this.diff <= 0 || this.stop) {
+				this.diff = 0
+				clearInterval(interval);
+				this.$emit("timeEnd");
+			} else {
+				this.updateTime(0, this.days)
+				this.updateTime(1, this.hours)
+				this.updateTime(2, this.minutes)
+				this.updateTime(3, this.seconds)
 			}
-		]
-	}
-},
-computed: {
-	seconds () {
-		return Math.trunc(this.diff) % 60
-	},
-	minutes () {
-		return Math.trunc(this.diff / 60) % 60
-	},
-	hours () {
-		return Math.trunc(this.diff / 60 / 60) % 24
-	},
-	days () {
-		return Math.trunc(this.diff / 60 / 60 / 24)
-	}
-},
-watch: {
-	now (value) {
-		this.diff = this.now
-		if (this.diff <= 0 || this.stop) {
-			this.diff = 0
-			clearInterval(interval);
-			this.$emit("timeEnd");
-		} else {
-			this.updateTime(0, this.days)
-			this.updateTime(1, this.hours)
-			this.updateTime(2, this.minutes)
-			this.updateTime(3, this.seconds)
+		},
+		deadline(n) {
+			this.date = n;
+			interval = setInterval(() => {
+				this.now = this.date--;
+			}, 1000)
 		}
 	},
-	deadline(n) {
-		this.date = n;
-		interval = setInterval(() => {
-			this.now = this.date--;
-		}, 1000)
-	}
-},
-filters: {
-	twoDigits (value) {
-		if (value.toString().length <= 1) {
-			return '0' + value.toString()
+	filters: {
+		twoDigits (value) {
+			if (value.toString().length <= 1) {
+				return '0' + value.toString()
+			}
+			return value.toString()
 		}
-		return value.toString()
-	}
-},
-methods: {
-	updateTime (idx, newValue) {
-		if (idx >= this.timeData.length || newValue === undefined) {
-			return
-		}
-		if (window['requestAnimationFrame']) {
-			this.frame = requestAnimationFrame(this.updateTime.bind(this))
-		}
-		const d = this.timeData[idx]
-		const val = (newValue < 0 ? 0 : newValue)
-		if (val !== d.current) {
-			d.previous = d.current
-			d.current = val
-			const el = document.querySelector(`#${d.elementId}`)
-			if (el) {
-				el.classList.remove('flip')
-				void el.offsetWidth
-				el.classList.add('flip')
+	},
+	methods: {
+		updateTime (idx, newValue) {
+			if (idx >= this.timeData.length || newValue === undefined) return
+			if (window['requestAnimationFrame']) {
+				this.frame = requestAnimationFrame(this.updateTime.bind(this))
+			}
+			const d = this.timeData[idx]
+			const val = (newValue < 0 ? 0 : newValue)
+			if (val !== d.current) {
+				d.previous = d.current
+				d.current = val
+				const el = document.querySelector(`#${d.elementId}`)
+				if (el) {
+					el.classList.remove('flip')
+					void el.offsetWidth
+					el.classList.add('flip')
+				}
 			}
 		}
+	},
+	beforeDestroy () {
+		if (window['cancelAnimationFrame']) {
+			cancelAnimationFrame(this.frame)
+		}
+	},
+	destroyed () {
+		clearInterval(interval)
 	}
-},
-beforeDestroy () {
-	if (window['cancelAnimationFrame']) {
-		cancelAnimationFrame(this.frame)
-	}
-},
-destroyed () {
-	clearInterval(interval)
-}
 }
 </script>
 
 <style scoped lang="scss">
 .flip-clock {
-perspective: 600px;
-margin: 0 auto;
+perspective: 300px;
 display: inline-block;
+transform: translate3d(0, 0, 0);
 }
 .flip-clock,.flip-clock::before,.flip-clock::after {
 box-sizing: border-box;
@@ -176,9 +174,7 @@ background: #E62640;
 padding: 0.23em 0.15em 0.4em;
 border-radius: $borderRadius $borderRadius 0 0;
 backface-visibility: hidden;
--webkit-backface-visibility: hidden;
 transform-style: preserve-3d;
-height: $halfHeight;
 }
 .flip-card__bottom,
 .flip-card__back-bottom {
@@ -204,7 +200,7 @@ margin-top: -$halfHeight;
 .flip-card__back::before,
 .flip-card__bottom::after,
 .flip-card__back-bottom::after {
-content: attr(data-value);
+	content: attr(data-value);
 }
 .flip-card__back {
 position: absolute;
@@ -230,31 +226,31 @@ animation-fill-mode: both;
 animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
 }
 @keyframes flipTop {
-0% {
-	transform: rotateX(0deg);
-	z-index: 2;
-}
-0%, 99% {
-	opacity: 1;
-}
-100% {
-	transform: rotateX(-90deg);
-	opacity: 0;
-}
+	0% {
+		transform: rotateX(0deg);
+		z-index: 2;
+	}
+	99% {
+		opacity: 1;
+	}
+	100% {
+		transform: rotateX(-90deg);
+		opacity: 0;
+	}
 }
 @keyframes flipBottom {
-0%, 50% {
-	z-index: -1;
-	transform: rotateX(90deg);
-	opacity: 0;
-}
-51% {
-	opacity: 1;
-}
-100% {
-	opacity: 1;
-	transform: rotateX(0deg);
-	z-index: 5;
-}
+	50% {
+		z-index: -1;
+		transform: rotateX(90deg);
+		opacity: 0;
+	}
+	51% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+		transform: rotateX(0deg);
+		z-index: 5;
+	}
 }
 </style>

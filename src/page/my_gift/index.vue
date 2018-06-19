@@ -4,6 +4,7 @@
         <div class="gift-wrap">
             <GiftItem v-for="x in list" 
                         :obj="x"
+                        :coupnId = "giftId"
                         @receive="getGift"
                         :key="x.gift_id"></GiftItem>
         </div>
@@ -22,9 +23,11 @@
         data() {
             return {
                 list: [],
+                giftId : ''
             }
         },
         created() {
+            this.giftId = this.$route.query.coupnId*1 || 0;
             this.initPage();
         },
         methods: {

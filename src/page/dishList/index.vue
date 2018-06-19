@@ -10,14 +10,14 @@
         </div>
         <div v-swipeleft="sLeft" 
              v-swiperight="sRight" 
-             :style="setH"
-             ref="cartContainer">
+             :style="setH">
             <iCon v-if="dishList">
                 <iConItem v-for="x in dishList" 
                             :key="x.id" 
                             :endX="ballEnd" 
                             :goodItemList="x" 
-                            @getPop="showPop"></iConItem>
+                            @getPop="showPop"
+                            @ballOver="endBall"></iConItem>
             </iCon>
             <div style="padding-top:45%" v-if="dishList.length===0">
                 <NoneData title="当前位置超出配送范围~"></NoneData>
@@ -215,6 +215,10 @@
                     }
                 })
                 this.$refs.bar.$emit('swiperLeft',0,this.secondNav[0].id,this.secondNav[0].pid);
+            },
+            //  监听加入购物车动画
+            endBall() {
+
             }
         }
     }

@@ -785,6 +785,25 @@ export const rushToBuy = ({
     url : `${apiUrl}${url}`
 })
 
+// 全场优惠券
+export const getCoupn = ({
+    method = 'get',
+    url = '/index/get_coupon',
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}`
+})
+export const receiveCoupn = ({
+    method = 'get',
+    url = '/user/new_activity_coupon',
+    activity,
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}/activity/${activity}`
+})
+
 // 微信获取config信息
 export const getConfig = ({
     method = 'get',

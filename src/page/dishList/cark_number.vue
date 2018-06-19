@@ -1,5 +1,7 @@
 <template>
-    <div class="wx-shop" @click="$router.push({name : 'cark'})">
+    <div class="wx-shop" 
+         @click="$router.push({name : 'cark'})"
+         :class="{move_in_cart : isEnd}">
         <span v-if="shopCarkLenth !== 0">{{shopCarkLenth}}</span>
     </div>
 </template>

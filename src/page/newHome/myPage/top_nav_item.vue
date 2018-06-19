@@ -39,8 +39,8 @@
     }
     span {
         position: absolute;
-        right : 0;
-        top : 0;
+        right: rem(-30);
+        top: rem(-10);
         padding : 0 rem(6);
         background-color : #ff8e00;
         color : #fff;

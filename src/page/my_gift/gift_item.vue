@@ -1,5 +1,6 @@
 <template>
-    <div class="wx-gift clearfix">
+    <div class="wx-gift clearfix"
+            :class="{'gift-select' : obj.gift_id === coupnId}">
         <div class="wx-gift__img">
             <img v-lazy="obj.image + '?x-oss-process=image/resize,w_240,h_240'" alt="">
         </div>
@@ -21,6 +22,9 @@
         props : {
             obj : {
                 type : Object
+            },
+            coupnId : {
+                type : Number
             }
         },
         methods: {
@@ -88,7 +92,17 @@
         }
     }
 }
+.gift-select {
+    animation-name: bigAssButtonPulse;
+    animation-duration:2.5s;
+    animation-iteration-count:3;  
+}
 .gift-faile {
     background-color: #9d9d9d;
+}
+@keyframes bigAssButtonPulse {
+    from { -webkit-box-shadow: 0 0 15px #fff; }
+    50% { -webkit-box-shadow: 0 0 25px #ff8e00; }
+    to { -webkit-box-shadow: 0 0 15px #fff; }
 }
 </style>

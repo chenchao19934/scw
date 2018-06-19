@@ -26,6 +26,8 @@ const store = new Vuex.Store({
 		orderDlType : '1',
 		// 显示分享蒙版
 		isShowMask : false,
+		// 全场优惠券
+		isCoupMask : false,
 
 		scrollTop : 0,
 

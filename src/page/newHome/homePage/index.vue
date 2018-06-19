@@ -13,6 +13,26 @@
                     </div> -->
                     
                     <imgScroll :bannerList="bannerList"></imgScroll>
+
+                    <div class="wx-imgList" 
+                            v-swipeleft="sLeft" 
+                            v-swiperight="sRight">
+                        <div @click="$router.push({name : 'Invited'})">
+                            <img src="../../../assets/image/home/home_invited.png" alt="">
+                        </div>
+                        <div class="wx-imgList__second">
+                            <li>
+                                <img src="../../../assets/image/home/home_time.png" alt="">
+                            </li>
+                            <li class="min-warap">
+                                <img src="../../../assets/image/home/home_user.png" alt="">
+                            </li>
+                            <li class="min-warap">
+                                <img src="../../../assets/image/home/home_sign.png" alt="">
+                            </li>
+                        </div>
+                    </div>
+
                     <div v-show="timeList.length !== 0">
                         <div class="wx-flipDown">
                             <div class="wx-flipDown__imgWrap">
@@ -316,9 +336,44 @@
     overflow: scroll;
     overflow-y: hidden;
 }
+@include b(imgList) {
+    display: flex;
+    justify-content: space-around;
+    padding: rem(15) rem(10);
+    img {
+        display: block;
+        width: 100%;
+    }
+    >div {
+        flex: 0 0 rem(320);
+        min-height: rem(275);
+        overflow: hidden;
+    }
+    >div:nth-child(1) {
+        flex: 0 0 rem(378);
+    }
+    @include e(second) {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        > li {
+            flex: 0 0 rem(320);
+            height: rem(140);
+            border-radius: rem(5);
+            background: #fff;
+            overflow: hidden;
+        }
+        li.min-warap {
+            flex: 0 0 rem(155);
+            height: rem(130);
+            margin-top: rem(5);
+        } 
+    }
+}
 @include b(flipDown) {
     display: flex;
-    padding: rem(20) rem(10);
+    justify-content: space-around;
+    padding: rem(20) 0;
     @include e(txt) {
         height: rem(66);
         line-height: rem(66);

@@ -7,25 +7,39 @@
 		<div class="shareMask" 
 				@click.stop.prevent="closeMask"
 				v-if="isShowMask"></div>
-		<MaskBox  :isShow="true"
+		<MaskBox  :isShow="isShowBindPhone"
 				  v-if="isShowBindPhone"
 				  @close="closeMask">
 			<BindPhone slot="user"></BindPhone>
+		</MaskBox>
+
+		<MaskBox :isShow="isCoupMask"
+				v-if="isCoupMask">
+			<CoupMask slot="user"
+					  :obj="coupn"
+					  @receiveCoupn="getCoupn"></CoupMask>
 		</MaskBox>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import {initCark,addressName} from './api/newService';
+import {initCark,addressName,getCoupn,receiveCoupn} from './api/newService';
 
 import MaskBox from './page/compon/mask';
 import BindPhone from './components/bind_phone';
+import CoupMask from './components/coup_mask';
 export default {
 	name: "app",
 	components: {
 		MaskBox,
-		BindPhone
+		BindPhone,
+		CoupMask
+	},
+	data() {
+		return {
+			coupn: {}
+		}
 	},
 	beforeCreate () {
 		if (this.$device === 'wechat') {
@@ -48,11 +62,15 @@ export default {
 	},
 	created() {
 		this.initCark();
+		if (this.$store.state.isLogin) {
+			this.initCoupn();    
+        }
 	},
 	computed: {
 		...mapState([
 			'isShowMask',
-			'isShowBindPhone'
+			'isShowBindPhone',
+			'isCoupMask'
 		])
 	},
 	methods: {
@@ -80,6 +98,29 @@ export default {
 					this.$store.state.shopCarkLenth = count;
 				}
 			}
+		},
+		initCoupn() {
+			getCoupn({
+				user_id : localStorage.userId
+			}).then(res => {
+				if (res.is === 1) {
+					this.$store.state.isCoupMask = true;
+					res.list.forEach(element => {
+						if (element.childName === '') {
+							element.childName = '全场通用'
+						}
+					})
+					this.coupn = res;
+				}
+			})
+		},
+		async getCoupn(id) {
+			const data = await receiveCoupn({
+				activity : id,
+				user_id : localStorage.userId
+			})
+			this.$store.state.isCoupMask = false;
+			this.$router.push({name : 'Gift', query : {coupnId : data.message}});
 		},
 		closeMask() {
 			this.$store.state.isShowMask = false;

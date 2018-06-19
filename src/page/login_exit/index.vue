@@ -4,6 +4,7 @@
         <div>
             <mt-cell title="" is-link value="头像">
                 <img slot="icon" 
+                        v-if="userInfo.user_logo"
                         :src="userInfo.user_logo + '?x-oss-process=image/resize,w_50'" 
                         width="40" 
                         height="40"

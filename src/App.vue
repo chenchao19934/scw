@@ -33,7 +33,7 @@ export default {
 				if (res !== 'cancel') {
 					localStorage.setItem("lat",res.latitude);
                     localStorage.setItem("lon",res.longitude);
-					let data = addressName({
+					addressName({
 						lat : res.latitude,
 						lng : res.longitude
 					}).then(data => {

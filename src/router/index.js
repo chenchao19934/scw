@@ -31,7 +31,10 @@ const Coupon = ()=> import('@/page/my_coupon/index');
 // 我的礼品盒
 const Gift = ()=> import('@/page/my_gift/index');
 // 我的余额
-const Balanced = ()=> import('@/page/my_banlace/index');
+const Balanced = ()=> import('@/page/my_banlance/index');
+const BalancedPay = ()=> import('@/page/my_banlance_pay/index');
+const BalancedRecharge = ()=> import('@/page/my_banlance_recharge/index');
+
 // 邀请有礼
 const Invited = ()=> import('@/page/my_invited/index');
 const InvitedRule = ()=> import('@/page/my_invited/invited_rule');
@@ -293,6 +296,26 @@ export default new Router({
 			path : '/Balanced',
 			name : 'Balanced',
 			component : Balanced,
+			meta : {
+				keepAlive : false,
+				isLogin : true
+			}
+		},
+		// 余额支付
+		{
+			path : '/BalancedPay',
+			name : 'BalancedPay',
+			component : BalancedPay,
+			meta : {
+				keepAlive : false,
+				isLogin : true
+			}
+		},
+		// 余额充值
+		{
+			path : '/BalancedRecharge',
+			name : 'BalancedRecharge',
+			component : BalancedRecharge,
 			meta : {
 				keepAlive : false,
 				isLogin : true

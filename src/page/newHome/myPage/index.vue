@@ -139,6 +139,9 @@
                     case 111 : 
                         this.$router.push({name : 'Suggestion'})
                         break;
+                    case 190 :
+                        this.$router.push({name : 'BalancedPay'})
+                        break;
                     default : 
                         break;
                 }

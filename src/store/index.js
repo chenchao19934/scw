@@ -38,6 +38,10 @@ const store = new Vuex.Store({
 			levelTitle : '新鲜水果',
 			levelTwo: 'fdf6f19b84ee462d9849b5e5db61b24f',
 			pageOffset : 0
+		},
+		locationName : {
+			detail_address : '' || '请选择小区或大厦等',
+			location : ''
 		}
 	},
 	getters: {

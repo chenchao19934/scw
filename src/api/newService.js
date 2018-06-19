@@ -265,6 +265,25 @@ export const BalanceList = ({
     method,
     url : `${apiUrl}${url}/user_id/${user_id}/page/${page}`
 })
+// 余额支付
+export const BalancePay = ({
+    method = 'get',
+    url = '/user/md_order_barcode',
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}`
+})
+export const BalanceNow = ({
+    method = 'get',
+    url = '/user/rechargeDiscount',
+    money = 50,
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}/money/${money}`
+})
+
 
 // 地址列表
 export const addressList = ({

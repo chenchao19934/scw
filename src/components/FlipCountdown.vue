@@ -8,7 +8,7 @@
 					<b class="flip-card__back" :data-value="data.previous | twoDigits"></b>
 					<b class="flip-card__back-bottom" :data-value="data.previous | twoDigits"></b>
 				</span>
-				<span class="flip-clock__slot">{{data.label}}</span>
+				<!-- <span class="flip-clock__slot">{{data.label}}</span> -->
 			</span>
 		</template>
 	</div>
@@ -20,15 +20,14 @@ export default {
 	name: 'flipCountdown',
 	props: {
 		deadline: {
-		type: String
+			type: String,
 		},
 		stop: {
-		type: Boolean
+			type: Boolean
 		}
 	},
 	data () {
 		return {
-			now: Math.trunc(new Date().getTime() / 1000),
 			date: null,
 			diff: 0,
 			timeData: [
@@ -74,8 +73,8 @@ export default {
 		}
 	},
 	watch: {
-		now (value) {
-			this.diff = this.now
+		date (value) {
+			this.diff = value
 			if (this.diff <= 0 || this.stop) {
 				this.diff = 0
 				clearInterval(interval);
@@ -87,12 +86,6 @@ export default {
 				this.updateTime(3, this.seconds)
 			}
 		},
-		deadline(n) {
-			this.date = n;
-			interval = setInterval(() => {
-				this.now = this.date--;
-			}, 1000)
-		}
 	},
 	filters: {
 		twoDigits (value) {
@@ -102,9 +95,17 @@ export default {
 			return value.toString()
 		}
 	},
+	created() {
+		this.date = this.deadline
+		interval = setInterval(() => {
+			this.date--;
+		}, 1000)
+	},
 	methods: {
 		updateTime (idx, newValue) {
-			if (idx >= this.timeData.length || newValue === undefined) return
+			if (idx >= this.timeData.length || newValue === undefined) {
+				return
+			}
 			if (window['requestAnimationFrame']) {
 				this.frame = requestAnimationFrame(this.updateTime.bind(this))
 			}
@@ -173,8 +174,6 @@ color: #fff;
 background: #E62640;
 padding: 0.23em 0.15em 0.4em;
 border-radius: $borderRadius $borderRadius 0 0;
-backface-visibility: hidden;
-transform-style: preserve-3d;
 }
 .flip-card__bottom,
 .flip-card__back-bottom {
@@ -221,9 +220,9 @@ animation-fill-mode: both;
 transform-origin: center bottom;
 }
 .flip .flip-card__bottom {
+animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
 transform-origin: center top;
 animation-fill-mode: both;
-animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
 }
 @keyframes flipTop {
 	0% {
@@ -239,6 +238,7 @@ animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
 	}
 }
 @keyframes flipBottom {
+	0%,
 	50% {
 		z-index: -1;
 		transform: rotateX(90deg);

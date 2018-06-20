@@ -33,7 +33,7 @@
                         </div>
                     </div>
 
-                    <div v-show="timeList.length !== 0">
+                    <div v-if="timeList.length !== 0">
                         <div class="wx-flipDown">
                             <div class="wx-flipDown__imgWrap">
                                 <img src="../../../assets/image/time_sell.jpg" alt="">
@@ -305,6 +305,7 @@
                         this.timeList  = res;
                     }else {
                         this.timeList  = res.list;
+                        console.log(res);
                         if (res.start_time > 0) {
                             this.statrTitle = '即将开始';
                             this.timeDown = res.start_time+'';

@@ -1,8 +1,6 @@
 <template>
     <div style="padding-top:82px;background-color:#f0f0f0">
-        <TopNav titles="我的订单"
-                :isConfirm="true"
-                @backs="unitBack"></TopNav>
+        <TopNav titles="我的订单"></TopNav>
         <TopList :arr="navList"
                  @order="changeNavIndex"></TopList>
         <div ref="list" 
@@ -75,13 +73,18 @@
             })
         },
         beforeRouteLeave(to, from, next) {
-            if (to.name === 'OrderDetails' || to.name === 'OrderEval') {
-                from.meta.isBack = true;
+            console.log(to);
+            if (to.name !== 'my' && to.name !== 'OrderDetails' && to.name !== 'OrderEval') {
+                next('/my')
             }else {
-                from.meta.isBack = false;
-                this.$store.state.scrollTop = 0;
+                if (to.name === 'OrderDetails' || to.name === 'OrderEval') {
+                    from.meta.isBack = true;
+                }else {
+                    from.meta.isBack = false;
+                    this.$store.state.scrollTop = 0;
+                }
+                next();  
             }
-            next();  
         },
         activated() {
             if (!this.$route.meta.isBack) {
@@ -184,9 +187,6 @@
             // 关闭联系配送员弹窗
             closeMask() {
                 this.maskShow = false;
-            },
-            unitBack() {
-                this.$router.push({name : 'my'})
             },
             onScroll(event) {
                 this.$store.state.scrollTop = event.target.scrollTop;

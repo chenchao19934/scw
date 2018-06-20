@@ -61,7 +61,8 @@
             },
             payOrder(id) {
                 console.warn(id);
-                window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${id}`
+                // window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${id}`
+                this.$router.push({name : 'Pay', query: {orderId : id}});
             }
         },
     }

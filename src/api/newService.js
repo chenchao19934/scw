@@ -283,7 +283,18 @@ export const BalanceNow = ({
     method,
     url : `${apiUrl}${url}/user_id/${user_id}/money/${money}`
 })
-
+// 充值
+export const PayChoose = ({
+    method = 'get',
+    url = '/user/userRecharge',
+    money,
+    real_money,
+    prefix = 'PW',
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}/money/${money}/real_money/${real_money}/prefix/${prefix}`
+})
 
 // 地址列表
 export const addressList = ({

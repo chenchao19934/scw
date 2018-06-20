@@ -55,6 +55,7 @@ const carkAddress = () => import('@/page/my_location/choose_cark');
 
 // 活动外链
 const ActiveLink = () => import('@/page/web_link/index');
+const Pay = () => import('@/page/web_link/pay');
 
 Vue.use(Router);
 
@@ -395,6 +396,16 @@ export default new Router({
 			meta : {
 				keepAlive : false,
 				isLogin : false
+			}	
+		},
+		// 微信支付
+		{
+			path : '/Pay',
+			name : 'Pay',
+			component : Pay,
+			meta : {
+				keepAlive : false,
+				isLogin : true
 			}	
 		},
 		/* 其他非法路由 */

@@ -213,7 +213,7 @@
                         this.$messagebox.confirm('是否取消收藏？').then(action => {
                             cancelCollection({eid : this.id})
                             this.isCollections = 0;
-                        })
+                        }).catch(()=> {})
                     }
                 }else {
                     this.$router.push({name : 'Login'})

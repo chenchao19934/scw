@@ -29,7 +29,7 @@
 
 <script>
     import TopNav from '../compon/top_nav';
-    import {BalanceNow} from '@/api/newService';
+    import {BalanceNow, PayChoose} from '@/api/newService';
     export default {
         components : {
             TopNav
@@ -38,7 +38,7 @@
             return {
                 payInfo : '',
                 payArr : [50,100,200,300],
-                money : '',
+                money : '50',
                 tag : 0
             }
         },
@@ -61,8 +61,15 @@
                 this.tag = index;
                 this.money = this.payArr[index];
             },
-            recharge() {
-                console.log(this.money);
+            async recharge() {
+                const data = await PayChoose({
+                    money : this.money,
+                    real_money : this.payInfo.money,
+                    user_id : localStorage.userId
+                })
+                if (data.code === 200) {
+                    window.location.href = `${process.env.BASE_URL}/public/banlance-pay.html#?id=${data.data[0].order_id}`;
+                }
             }
         },
     }

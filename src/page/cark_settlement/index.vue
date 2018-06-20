@@ -320,7 +320,8 @@
                             // 成功生成订单，跳到支付页面
                             this.$store.state.orderTime = '请选择送达时间';
                             this.$store.state.orderMsg = '';
-                            window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${res.data.order_group_id}`
+                            // window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${res.data.order_group_id}`
+                            this.$router.push({name : 'Pay', query: {orderId : res.data.order_group_id}});
                         }
                     })
                     this.$indicator.close();

@@ -843,3 +843,32 @@ export const upPhoto = ({
     method,
     url : `${apiUrl}${url}?serverid=${serverid}`
 })
+// 红包分享
+export const redPack = ({
+    method = 'get',
+    url = '/Activity/add_share_coupon',
+    group_id,
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}?user_id=${user_id}&group_id=${group_id}`
+})
+// 红包详情
+export const redPackInfo = ({
+    method = 'get',
+    url = '/Activity/share_coupon_detail',
+    share_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}?share_id=${share_id}`
+})
+// 红包领取
+export const receivePack = ({
+    method = 'get',
+    url = '/Activity/receive_share_coupon',
+    share_id,
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}?user_id=${user_id}&share_id=${share_id}`
+})

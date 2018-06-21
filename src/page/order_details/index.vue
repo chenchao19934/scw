@@ -95,7 +95,8 @@
             },
             // 立即支付
             payOrder() {
-                window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${this.$route.params.groupId}`
+                // window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${this.$route.params.groupId}`
+                this.$router.push({name : 'Pay', query: {orderId : this.$route.params.groupId}});
             },
             // 分享订单
             shareOrder() {

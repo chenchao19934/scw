@@ -56,6 +56,9 @@ const carkAddress = () => import('@/page/my_location/choose_cark');
 // 活动外链
 const ActiveLink = () => import('@/page/web_link/index');
 const Pay = () => import('@/page/web_link/pay');
+const PaySuccess = () => import('@/page/web_link/pay_success');
+// 红包
+const redPack = () => import('@/page/web_link/red_pack');
 
 Vue.use(Router);
 
@@ -406,6 +409,26 @@ export default new Router({
 			meta : {
 				keepAlive : false,
 				isLogin : true
+			}	
+		},
+		// 支付成功or失败
+		{
+			path : '/PaySuccess',
+			name : 'PaySuccess',
+			component : PaySuccess,
+			meta : {
+				keepAlive : false,
+				isLogin : false
+			}	
+		},
+		// 红包
+		{
+			path : '/redPack',
+			name : 'redPack',
+			component : redPack,
+			meta : {
+				keepAlive : false,
+				isLogin : false
 			}	
 		},
 		/* 其他非法路由 */

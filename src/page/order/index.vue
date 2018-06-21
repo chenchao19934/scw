@@ -73,17 +73,27 @@
             })
         },
         beforeRouteLeave(to, from, next) {
+            console.log(window.history)
             console.log(to);
-            if (to.name !== 'my' && to.name !== 'OrderDetails' && to.name !== 'OrderEval') {
+            if (to.name !== 'my' && to.name !== 'OrderDetails' && to.name !== 'OrderEval' && to.name !== 'Pay') {
                 next('/my')
             }else {
-                if (to.name === 'OrderDetails' || to.name === 'OrderEval') {
-                    from.meta.isBack = true;
+                if(to.name === 'Pay') {
+                    if (localStorage.toPay === 'true') {
+                        from.meta.isBack = true;
+                        next();
+                    }else {
+                        next('/my');
+                    }
                 }else {
-                    from.meta.isBack = false;
-                    this.$store.state.scrollTop = 0;
+                    if (to.name === 'OrderDetails' || to.name === 'OrderEval') {
+                        from.meta.isBack = true;
+                    }else {
+                        from.meta.isBack = false;
+                        this.$store.state.scrollTop = 0;
+                    }
+                    next();  
                 }
-                next();  
             }
         },
         activated() {

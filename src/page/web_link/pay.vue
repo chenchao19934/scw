@@ -40,16 +40,16 @@
         },
         created() {
             this.orderId = this.$route.query.orderId;
+            localStorage.setItem('toPay',false);
         },
         methods: {
             loadiframe() {
                 window.addEventListener("message", e => {
-                    console.log(e);
                     // 支付成功或失败回调
                     if (e.data === 'success') {
-                        this.$router.push({name :'Order',params : {type : 0}});
-                    }else {
-                        this.$router.push({name :'Order',params : {type : 0}});
+                        this.$router.push({name :'PaySuccess', query : {orderId : this.orderId,type : 0}});
+                    }else if(e.data === 'faile'){
+                        this.$router.push({name :'PaySuccess', query : {orderId : this.orderId,type : 1}});
                     }
                 },false);
             }

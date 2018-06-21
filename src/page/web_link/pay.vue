@@ -42,6 +42,10 @@
             this.orderId = this.$route.query.orderId;
             localStorage.setItem('toPay',false);
         },
+        destroyed() {
+            this.url = '';
+            console.log("this view destroyed");
+        },
         methods: {
             loadiframe() {
                 window.addEventListener("message", e => {

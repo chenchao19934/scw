@@ -38,8 +38,12 @@ service.interceptors.response.use(
 		return Promise.resolve(data);
 	},
 	(error) => {
-		MessageBox('提示', `请求数据失败 ${error}`);
-		return Promise.reject(error);
+		if (error.response.status === 302) {
+			
+		}else {
+			MessageBox('提示', `请求数据失败 ${error}`);
+			return Promise.reject(error);
+		}
 	},
 );
 

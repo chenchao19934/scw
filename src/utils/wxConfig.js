@@ -5,10 +5,9 @@ import { getConfig,upPhoto } from '../api/newService'
 
 // 判断当前环境
 if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger") {
+    Vue.prototype.$device = 'wechat';
     if (window.__wxjs_environment === 'miniprogram') {
         Vue.prototype.$device = 'miniprogram';
-    } else {
-        Vue.prototype.$device = 'wechat';
     }
 } else {
     Vue.prototype.$device = 'browser';

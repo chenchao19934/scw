@@ -6,10 +6,27 @@ function back(router) {
 }
 
 function parseFloat(num) {
-  console.log('hello world');
   return window.parseFloat(num.toFixed(2));
   // return 
 }
 
+function getQueryString(param) {
+  let currentUrl = decodeURIComponent(window.location.href);
+  let arr = currentUrl.split("?");
+  if (arr.length > 1) {
+    arr = arr[1].split("&");
+    for (var i = 0; i < arr.length; i++) {
+      var tem = arr[i].split("=");
+      if (tem[0] == param) {
+        return tem[1];
+      }
+    }
+    return null;
+  } else {
+    return null;
+  }
+}
 Vue.prototype.$back = back;
 Vue.prototype.$parseFloat = parseFloat;
+console.log("statrt")
+Vue.prototype.$getQueryString = getQueryString;

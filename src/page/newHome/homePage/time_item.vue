@@ -1,7 +1,7 @@
 <template>
     <div class="wx-timeItem">
         <div class="wx-timeItem__imgWrap">
-            <img src="https://scwnew.oss-cn-shenzhen.aliyuncs.com/149381036958556439.jpeg?x-oss-process=image/resize,w_150" alt="">
+            <img :src="goodItemList.img + '?x-oss-process=image/resize,w_150'" alt="">
         </div>
         <div class="wx-timeItem__txt">
             <h2 class="ellipsis">{{goodItemList.name}}</h2>

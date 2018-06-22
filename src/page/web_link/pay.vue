@@ -41,6 +41,13 @@
         created() {
             this.orderId = this.$route.query.orderId;
             localStorage.setItem('toPay',false);
+            this.$indicator.open({
+                text: '安全检测...',
+                spinnerType: 'fading-circle'
+            });
+            setTimeout(() => {
+                this.$indicator.close();
+            }, 4000);
         },
         destroyed() {
             this.url = '';

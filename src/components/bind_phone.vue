@@ -22,7 +22,7 @@
         </InputItem>
         <mt-button type="primary" 
                     size="large" 
-                    @click.native="checkLogin">登录</mt-button>
+                    @click.native="checkLogin">绑定</mt-button>
 </div>
 </template>
 

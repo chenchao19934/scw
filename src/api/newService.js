@@ -824,6 +824,16 @@ export const getConfig = ({
     method,
     url : `${apiUrl}${url}?url=${urlLink}`
 })
+// 第三授权登录
+export const threePartLogin = ({
+    method = 'post',
+    url = '/login/third_party_login',
+    data
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}`,
+    data : data
+})
 // 定位详情
 export const addressName = ({
     method = 'get',

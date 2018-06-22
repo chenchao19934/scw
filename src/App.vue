@@ -26,7 +26,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import {initCark,addressName,getCoupn,receiveCoupn} from './api/newService';
+import {initCark,addressName,getCoupn,receiveCoupn,threePartLogin} from './api/newService';
 
 import MaskBox from './page/compon/mask';
 import BindPhone from './components/bind_phone';
@@ -43,18 +43,61 @@ export default {
 			coupn: {}
 		}
 	},
-	beforeCreate () {
+	async beforeCreate () {
+		let url = this.$getQueryString('url') || '';
+		let wechat_nickname = this.$getQueryString('wechat_nickname') || '';
+		let wechat_headurl = this.$getQueryString('wechat_headurl') || '';
+		let open_id = this.$getQueryString('open_id') || '';
+		let union_id = this.$getQueryString('union_id') || '';
+		if (location.href.indexOf("dishDetail") < 0) {
+			if ( (localStorage.userId && localStorage.userId.length > 30  && localStorage.openId && localStorage.openId.length > 27) || (wechat_nickname && wechat_nickname.length >= 1 && open_id && open_id.length > 27)) {
+				this.$store.state.isLogin = true;
+				if (wechat_nickname && wechat_nickname.length >= 1) {
+					localStorage.setItem('userName',wechat_nickname);
+					localStorage.setItem('union_id',union_id);
+					localStorage.setItem('openId',open_id);
+					localStorage.setItem('logo',wechat_headurl);
+				}
+				if(!(localStorage.userId && localStorage.userId.length > 30)){
+					let LoginInfo = {
+						'userName': localStorage.userName,
+						'union_id': localStorage.union_id,
+						'userId': "noUserid",
+						'openId': localStorage.openId,
+						'logo': localStorage.logo,
+						'token': "999999",
+						'types': 2
+					}
+					let data = await threePartLogin({
+						data : LoginInfo
+					})
+					if (data.code == 200) {
+						localStorage.setItem('userName', data.date.user_nick_name);
+						localStorage.setItem('userId', data.date.user_id);
+						localStorage.setItem('logo', data.date.user_logo);   
+					}
+				}
+			}else {
+				if (this.$device === 'miniprogram') {
+					
+				}else {
+					window.location.href='../index.php/home/test/get_wx_code';
+				}
+			}
+		}
+	},
+	created() {
 		if (this.$device === 'wechat') {
 			this.wxLocation((res)=> {
 				if (res !== 'cancel') {
 					localStorage.setItem("lat",res.latitude);
-                    localStorage.setItem("lon",res.longitude);
+					localStorage.setItem("lon",res.longitude);
 					addressName({
 						lat : res.latitude,
 						lng : res.longitude
 					}).then(data => {
 						this.$store.state.addressName = data;
-                    	localStorage.setItem("locationName",data);
+						localStorage.setItem("locationName",data);
 					})
 				}else {
 					this.$toash('定位失败，请打开微信定位功能！');
@@ -62,11 +105,8 @@ export default {
 			});
 		}
 	},
-	created() {
-		this.initCark();
-		if (this.$store.state.isLogin) {
-			this.initCoupn();    
-        }
+	mounted() {
+		this.initShopCark();
 	},
 	computed: {
 		...mapState([
@@ -76,18 +116,19 @@ export default {
 		])
 	},
 	methods: {
-		initCark() {
+		async initShopCark() {
 			if (localStorage.userId) {
 				let count = 0;
-				initCark({user_id : localStorage.userId}).then(res=> {
-					if (res !== "") {
-						res.forEach(element => {
-							count += element.number;
-						});
-					}
-					this.$store.state.shopCarkLenth = count;
-				});
-				this.$store.dispatch('getBindPhone',localStorage.userId)
+				let data = await initCark({user_id : localStorage.userId});
+				console.log(data);
+				if (data !== "") {
+					data.forEach(element => {
+						count += element.number;
+					});
+				}
+				this.$store.state.shopCarkLenth = count;
+				this.initCoupn(); 
+				this.$store.dispatch('getBindPhone',localStorage.userId);
 			}else {
 				if (localStorage.ShoppingCart) {
 					let arr = JSON.parse(localStorage.ShoppingCart),
@@ -101,20 +142,19 @@ export default {
 				}
 			}
 		},
-		initCoupn() {
-			getCoupn({
+		async initCoupn() {
+			let data = await getCoupn({
 				user_id : localStorage.userId
-			}).then(res => {
-				if (res.is === 1) {
-					this.$store.state.isCoupMask = true;
-					res.list.forEach(element => {
-						if (element.childName === '') {
-							element.childName = '全场通用'
-						}
-					})
-					this.coupn = res;
-				}
 			})
+			if (data.is === 1) {
+				this.$store.state.isCoupMask = true;
+				data.list.forEach(element => {
+					if (element.childName === '') {
+						element.childName = '全场通用'
+					}
+				})
+				this.coupn = res;
+			}
 		},
 		async getCoupn(id) {
 			const data = await receiveCoupn({

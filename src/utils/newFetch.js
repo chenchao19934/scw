@@ -6,8 +6,8 @@ import {
 	Indicator
 } from 'mint-ui';
 
-const baseURL = 'http://scw.new.songcaiwa.cn:8080';
-// const baseURL = 'https://scw.new.songcaiwa.cn';
+// const baseURL = 'http://scw.new.songcaiwa.cn:8080';
+const baseURL = 'https://scw.new.songcaiwa.cn';
 
 // 创建axios实例
 const service = axios.create({
@@ -38,8 +38,12 @@ service.interceptors.response.use(
 		return Promise.resolve(data);
 	},
 	(error) => {
-		MessageBox('提示', `请求数据失败 ${error}`);
-		return Promise.reject(error);
+		if (error.response.status === 302) {
+			
+		}else {
+			MessageBox('提示', `请求数据失败 ${error}`);
+			return Promise.reject(error);
+		}
 	},
 );
 

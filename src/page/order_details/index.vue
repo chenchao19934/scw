@@ -85,6 +85,7 @@
                 if (this.$device === 'wechat') {
                     const url = `${process.env.BASE_URL}/public/activepage/share-order.html#?orderId=${this.$route.params.groupId}`;
                     this.wxShare('快来围观我今天买了什么菜！','送菜蛙！',url,'https://scw.new.songcaiwa.cn/public/static/home/images/scw_icon.png',(res)=> {
+                        this.$store.state.isShowMask = false;
                         if (res === 'shareSuccess') {
                             this.$toast('分享成功！')
                         }else {

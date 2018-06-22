@@ -92,12 +92,13 @@
                     })
                     const url = `${process.env.BASE_URL}/public/wScw/#/redPack?packId=${data.id}`;
                     this.wxShare(`【送菜蛙红包】第${data.max_user_order}个领取的人红包最大！`,'手速很重要，手气更重要！',url,'https://scwnew.oss-cn-shenzhen.aliyuncs.com/hongbao/orderhonebao.png',(res)=> {
+                        this.showRedpack = false;
+                        this.$store.state.isShowMask = false;
                         if (res === 'shareSuccess') {
                             this.$toast('红包分享成功！')
                         }else {
                             this.$toast('取消分享！')
                         }
-                        this.showRedpack = false;
                     })
                 }
             },

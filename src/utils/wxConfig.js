@@ -5,10 +5,9 @@ import { getConfig,upPhoto } from '../api/newService'
 
 // 判断当前环境
 if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger") {
+    Vue.prototype.$device = 'wechat';
     if (window.__wxjs_environment === 'miniprogram') {
         Vue.prototype.$device = 'miniprogram';
-    } else {
-        Vue.prototype.$device = 'wechat';
     }
 } else {
     Vue.prototype.$device = 'browser';
@@ -30,7 +29,9 @@ if (Vue.prototype.$device === 'wechat') {
         wx.ready(() => {
             wx.checkJsApi({
                 jsApiList: ["getLocation", "onMenuShareTimeline", "onMenuShareAppMessage", "chooseImage", "uploadImage"],
-                success: res => {}
+                success: res => {
+                    console.log(res);
+                }
             });
         });
         wx.error((res) => { console.log(res) });

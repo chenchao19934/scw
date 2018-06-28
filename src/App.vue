@@ -49,6 +49,16 @@ export default {
 		let wechat_headurl = this.$getQueryString('wechat_headurl') || '';
 		let open_id = this.$getQueryString('open_id') || '';
 		let union_id = this.$getQueryString('union_id') || '';
+		// 邀请人ID
+		let uId = this.$getQueryString('uId') || '';
+		if (uId.length > 30 && uId !== '') {
+			localStorage.uId = uId;
+		}
+		// 红包ID
+		let packId = this.$getQueryString('packId') || '';
+		if (packId !== '') {
+			localStorage.packId = packId;
+		}
 		if (location.href.indexOf("dishDetail") < 0) {
 			if ( (localStorage.userId && localStorage.userId.length > 30  && localStorage.openId && localStorage.openId.length > 27) || (wechat_nickname && wechat_nickname.length >= 1 && open_id && open_id.length > 27)) {
 				this.$store.state.isLogin = true;
@@ -75,13 +85,24 @@ export default {
 						localStorage.setItem('userName', data.date.user_nick_name);
 						localStorage.setItem('userId', data.date.user_id);
 						localStorage.setItem('logo', data.date.user_logo);   
+						if (url === 'redPack') {
+							this.$router.push({name : 'redPack'})
+						}else if (url === 'shareNewUser') {
+							this.$router.push({name : 'shareNewUser'})
+						}
 					}
 				}
 			}else {
 				if (this.$device === 'miniprogram') {
 					
-				}else {
-					window.location.href='../index.php/home/test/get_wx_code';
+				}else if (this.$device === 'wechat'){
+					if (window.location.href.indexOf('redPack') >= 0) {
+						window.location.href='../index.php/home/test/get_wx_code?url=redPack';
+					}else if (window.location.href.indexOf('shareNewUser') >= 0) {
+						window.location.href='../index.php/home/test/get_wx_code?url=shareNewUser';
+					}else {
+						window.location.href='../index.php/home/test/get_wx_code';
+					}
 				}
 			}
 		}
@@ -153,7 +174,7 @@ export default {
 						element.childName = '全场通用'
 					}
 				})
-				this.coupn = res;
+				this.coupn = data;
 			}
 		},
 		async getCoupn(id) {

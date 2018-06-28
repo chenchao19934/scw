@@ -77,6 +77,7 @@
             },
             initShare() {
                 if (this.$device === 'wechat') {
+                    this.registerConfig();
                     const url = `${process.env.BASE_URL}/public/share-pageV1.html?uId=${localStorage.userId}`;
                     this.wxShare('新人专享，您已获得满59减30红包，戳我买买买!','看见好的，就想起你!',url,'https://scwnew.oss-cn-shenzhen.aliyuncs.com/lALPBbCc1UvSoEDMyMzI_200_200.png',(res)=> {
                         this.$store.state.isShowMask = false;

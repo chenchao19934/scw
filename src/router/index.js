@@ -57,8 +57,9 @@ const carkAddress = () => import('@/page/my_location/choose_cark');
 const ActiveLink = () => import('@/page/web_link/index');
 const Pay = () => import('@/page/web_link/pay');
 const PaySuccess = () => import('@/page/web_link/pay_success');
-// 红包
+// 红包	邀请好友
 const redPack = () => import('@/page/web_link/red_pack');
+const shareNewUser = () => import('@/page/web_link/share_new_user');
 
 Vue.use(Router);
 
@@ -426,6 +427,16 @@ export default new Router({
 			path : '/redPack',
 			name : 'redPack',
 			component : redPack,
+			meta : {
+				keepAlive : false,
+				isLogin : false
+			}	
+		},
+		// 邀请好友
+		{
+			path : '/shareNewUser',
+			name : 'shareNewUser',
+			component : shareNewUser,
 			meta : {
 				keepAlive : false,
 				isLogin : false

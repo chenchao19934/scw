@@ -585,7 +585,16 @@ export const userInvited = ({
     method,
     url : `${apiUrl}${url}/user_id/${user_id}`,
 })
-
+// 绑定关系
+export const userBindInvited = ({
+    method = 'get',
+    url = '/user/userNewInvit',
+    invit_id,
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${invit_id}/invit_id/${user_id}`,
+})
 // 购物车
 export const shopCark = ({
     method = 'get',

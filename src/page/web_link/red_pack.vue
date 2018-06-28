@@ -58,7 +58,7 @@
             }
         },
         created() {
-            this.packId = this.$route.query.packId || 0;
+            this.packId = this.$route.query.packId || localStorage.packId;
             this.receivePack();
         },
         methods: {
@@ -91,6 +91,7 @@
             },
             initShare() {
                 if (this.$device === 'wechat') {
+                    this.registerConfig();
                     const url = `${process.env.BASE_URL}/public/wScw/#/redPack?packId=${this.packId}`;
                     this.wxShare(`【送菜蛙红包】第${this.maxUser}个领取的人红包最大！`,'手速很重要，手气更重要！',url,'https://scwnew.oss-cn-shenzhen.aliyuncs.com/hongbao/orderhonebao.png',(res)=> {
                         this.showRedpack = false;

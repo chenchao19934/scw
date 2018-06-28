@@ -61,9 +61,9 @@
             },
             payOrder(id) {
                 console.warn(id);
-                // window.location.href = `${process.env.BASE_URL}/public/cark-success-pay.html#?id=${id}`
                 localStorage.toPay = true;
-                this.$router.push({name : 'Pay', query: {orderId : id}});
+                window.location.href = `${process.env.BASE_URL}/public/wxPay.html?orderId=${id}`
+                // this.$router.push({name : 'Pay', query: {orderId : id}});
             }
         },
     }

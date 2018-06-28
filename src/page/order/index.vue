@@ -73,7 +73,7 @@
             })
         },
         beforeRouteLeave(to, from, next) {
-            console.log(window.history)
+            console.log("warm.............")
             console.log(to);
             if (to.name !== 'my' && to.name !== 'OrderDetails' && to.name !== 'OrderEval' && to.name !== 'Pay') {
                 next('/my')

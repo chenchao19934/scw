@@ -60,6 +60,7 @@ const PaySuccess = () => import('@/page/web_link/pay_success');
 // 红包	邀请好友
 const redPack = () => import('@/page/web_link/red_pack');
 const shareNewUser = () => import('@/page/web_link/share_new_user');
+const newUser = () => import('@/page/web_link/new_user');
 
 Vue.use(Router);
 
@@ -440,6 +441,15 @@ export default new Router({
 			meta : {
 				keepAlive : false,
 				isLogin : false
+			}	
+		},
+		{
+			path : '/newUser',
+			name : 'newUser',
+			component : newUser,
+			meta : {
+				keepAlive : true,
+				isLogin : true
 			}	
 		},
 		/* 其他非法路由 */

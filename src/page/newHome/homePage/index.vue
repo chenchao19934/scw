@@ -24,10 +24,10 @@
                             <li>
                                 <img src="../../../assets/image/home/home_time.png" alt="">
                             </li>
-                            <li class="min-warap">
+                            <li class="min-warap" @click="$router.push({name : 'newUser'})">
                                 <img src="../../../assets/image/home/home_user.png" alt="">
                             </li>
-                            <li class="min-warap">
+                            <li class="min-warap" @click="sign()">
                                 <img src="../../../assets/image/home/home_sign.png" alt="">
                             </li>
                         </div>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="wx-flipDown__txt">{{statrTitle}}</div>
                             <flip-countdown :deadline="timeDown"
-                                            @timeEnd="changeTime"></flip-countdown>
+                                            @timeEnd="getRush"></flip-countdown>
                         </div>
                         <div class="wx-flipGood">
                             <TimeItem v-for="x in timeList" 
@@ -112,7 +112,7 @@
 <script>
     import topLocation from './top_location';
 
-    import {newHomeList, fruitList, vegeList, porkList, seafoodList, snacksList, milkList, coolfoodList, rushToBuy} from '@/api/newService.js'
+    import {newHomeList, fruitList, vegeList, porkList, seafoodList, snacksList, milkList, coolfoodList, rushToBuy, sign} from '@/api/newService.js'
     import {mapState} from 'vuex'
     import imgScroll from '@/page/compon/top_imgScroll';
     import NewBar from '@/page/compon/scroll_new';
@@ -232,6 +232,7 @@
                     this.$refs.loadmore.onTopLoaded();
                 },2000);
             },
+            // 下拉触发
             handleTopChange(status) {
                 console.log(status)
                 this.topStatus = status;
@@ -245,6 +246,7 @@
                         break
                 }
             },
+            // 滑动切换分类
             sLeft() {
                 this.bars++;
                 if(this.bars > this.secondNav.length-1){
@@ -259,40 +261,48 @@
                 }
                 this.$refs.bar.$emit('swiperLeft',this.bars+'');
             },
+            // 二级导航栏索引
             getSecon(e) {
                 this.bars = e+'';
             },
+            // 水果数据
             async getFruilt() {
                 await fruitList({}).then(res => {
                     this.fruilt = res.data;
                 });
             },
+            // 蔬菜数据
             async getVege() {
                 await vegeList({}).then(res => {
                     this.vege = res.data;
                 });
             },
+            // 肉类数据
             async getPork() {
                 await porkList({}).then(res => {
                     this.pork = res.data;
                 });
             },
+            // 水产海鲜数据
             async getSeafood() {
                 await seafoodList({}).then(res => {
                     this.seafood = res.data;
                 });
             },
+            // 休闲零食
             async getSnacks() {
                 await snacksList({}).then(res => {
                     this.snack = res.data;
                 });
                 console.log(this.snacks);
             },
+            // 酒水茶饮
             async getMilk() {
                 await milkList({}).then(res => {
                     this.milk = res.data;
                 });
             },
+            // 速食冷藏
             async getCoolfood() {
                 await coolfoodList({}).then(res => {
                     this.coolfood = res.data;
@@ -317,9 +327,26 @@
                     }
                 })
             },
-            changeTime() {
-                this.getRush();
-            }
+            // 签到
+            sign() {
+                if (this.$store.state.isLogin) {
+                    sign({user_id : localStorage.userId}).then(res=> {
+                        if (res.code == 200) {
+                            this.$toast(res.message);
+                            addition({user_id : localStorage.userId}).then(res=> {
+                                this.additionList = res.date;
+                            });
+                        }else {
+                            this.$toast(res.message);
+                        }
+                    })
+                } else {
+                    this.$toast("登录后才能参与签到！");
+                    setTimeout(() => {
+                        this.$router.push({name : 'Login'})
+                    }, 2000);
+                }
+            },
         }
     }
 </script>

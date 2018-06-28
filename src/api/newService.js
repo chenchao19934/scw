@@ -595,6 +595,25 @@ export const userBindInvited = ({
     method,
     url : `${apiUrl}${url}/user_id/${invit_id}/invit_id/${user_id}`,
 })
+// 新人优惠券领取
+export const newUserCoupn = ({
+    method = 'get',
+    url = '/index/xinren',
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}`,
+})
+// 老用户优惠券领取
+export const oldUserCoupn = ({
+    method = 'get',
+    url = '/index/laoyonghu',
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/user_id/${user_id}`,
+})
+
 // 购物车
 export const shopCark = ({
     method = 'get',

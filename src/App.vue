@@ -141,7 +141,6 @@ export default {
 			if (localStorage.userId) {
 				let count = 0;
 				let data = await initCark({user_id : localStorage.userId});
-				console.log(data);
 				if (data !== "") {
 					data.forEach(element => {
 						count += element.number;

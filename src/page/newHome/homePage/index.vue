@@ -184,6 +184,18 @@
         created() {
             this.getRush();
             this.initPage();
+            document.onkeydown = e => {
+                switch(e.keyCode) {
+                    case 37:
+                        this.sRight();
+                        break;
+                    case 39:
+                        this.sLeft();
+                        break;
+                    default :
+                        break;
+                }
+            }    
         },
         watch : {
             bars(n) {

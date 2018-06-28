@@ -43,7 +43,7 @@ export default {
 			coupn: {}
 		}
 	},
-	async beforeCreate () {
+	async created() {
 		let url = this.$getQueryString('url') || '';
 		let wechat_nickname = this.$getQueryString('wechat_nickname') || '';
 		let wechat_headurl = this.$getQueryString('wechat_headurl') || '';
@@ -90,6 +90,8 @@ export default {
 						}else if (url === 'shareNewUser') {
 							this.$router.push({name : 'shareNewUser'})
 						}
+						// 查询用户是否绑定手机号
+						this.$store.dispatch('getBindPhone',localStorage.userId);
 					}
 				}
 			}else {
@@ -106,8 +108,6 @@ export default {
 				}
 			}
 		}
-	},
-	created() {
 		if (this.$device === 'wechat') {
 			this.wxLocation((res)=> {
 				if (res !== 'cancel') {
@@ -125,8 +125,6 @@ export default {
 				}
 			});
 		}
-	},
-	mounted() {
 		this.initShopCark();
 	},
 	computed: {
@@ -137,6 +135,7 @@ export default {
 		])
 	},
 	methods: {
+		// 初始化购物车
 		async initShopCark() {
 			if (localStorage.userId) {
 				let count = 0;
@@ -148,7 +147,6 @@ export default {
 				}
 				this.$store.state.shopCarkLenth = count;
 				this.initCoupn(); 
-				this.$store.dispatch('getBindPhone',localStorage.userId);
 			}else {
 				if (localStorage.ShoppingCart) {
 					let arr = JSON.parse(localStorage.ShoppingCart),
@@ -162,6 +160,7 @@ export default {
 				}
 			}
 		},
+		// 初始化全场优惠券
 		async initCoupn() {
 			let data = await getCoupn({
 				user_id : localStorage.userId
@@ -176,6 +175,7 @@ export default {
 				this.coupn = data;
 			}
 		},
+		// 全场优惠券领取
 		async getCoupn(id) {
 			const data = await receiveCoupn({
 				activity : id,

@@ -6,6 +6,7 @@
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
     export default {
         data() {
             return {
@@ -19,6 +20,9 @@
             this.from = this.$route.params.from
         },
         methods: {
+            ...mapMutations([
+                'setLocation'
+            ]),
             loadiframe() {
                 let iframe = document.getElementById('getAddress').contentWindow;
                 iframe.postMessage('hello', 'https://m.amap.com/picker/');
@@ -35,6 +39,11 @@
                                 this.$router.push({name : this.from})
                                 break;
                             default :
+                                let locationObj = {
+                                    detail_address : e.data.name,
+                                    location : `${lng},${lat}`
+                                }
+                                this.setLocation(locationObj);
                                 this.$back(this.$router);
                         }
                         this.time ++;

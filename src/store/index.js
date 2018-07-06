@@ -96,6 +96,9 @@ const store = new Vuex.Store({
 		},
 		setMsg(state,b) {
 			state.orderMsg = b;
+		},
+		setLocation(state,b) {
+			state.locationName = b;
 		}
 	},
 });

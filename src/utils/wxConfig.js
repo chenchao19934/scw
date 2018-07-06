@@ -38,8 +38,8 @@ if (Vue.prototype.$device === 'wechat') {
             wx.error((res) => { console.log(res) });
         })
     }
-    Vue.prototype.registerConfig();
     Vue.prototype.wxLocation = callback => {
+        Vue.prototype.registerConfig();
         if (typeof(callback) !== 'function') return;
         wx.ready(() => {
             wx.getLocation({
@@ -50,11 +50,15 @@ if (Vue.prototype.$device === 'wechat') {
                 // 用户取消定位
                 cancel: ()=> {
                     callback("cancel");
+                },
+                fail : () => {
+                    callback("cancel");
                 }
             })
         })
     }
     Vue.prototype.wxShare = (title,desc,link,imgUrl,callback) => {
+        Vue.prototype.registerConfig();
         if (typeof(callback) !== 'function') return;
         wx.ready(() => {
             wx.onMenuShareTimeline({

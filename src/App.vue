@@ -124,6 +124,10 @@ export default {
 					this.$toash('定位失败，请打开微信定位功能！');
 				}
 			});
+		}else {
+			if (localStorage.userId) {
+				this.$store.dispatch('getBindPhone',localStorage.userId);
+			}
 		}
 		this.initShopCark();
 	},

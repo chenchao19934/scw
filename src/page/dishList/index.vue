@@ -102,7 +102,7 @@
             }
         },
         beforeRouteLeave(to, from, next) {
-            if (to.name === 'dishDetail') {
+            if (to.name === 'dishDetail' || to.name === 'search') {
                 from.meta.isBack = true;
             }else {
                 from.meta.isBack = false;

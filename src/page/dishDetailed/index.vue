@@ -292,7 +292,6 @@
             },
             initShare() {
                 if (this.$device === 'wechat') {
-                    this.registerConfig();
                     const url = window.location.href;
                     this.wxShare(this.dataAll.name,this.dataAll.description,url,this.dataAll.extimg[0].image+"?x-oss-process=image/resize,w_300/format,jpg/quality,Q_80",(res)=> {
                         this.$store.state.isShowMask = false;

@@ -28,5 +28,4 @@ function getQueryString(param) {
 }
 Vue.prototype.$back = back;
 Vue.prototype.$parseFloat = parseFloat;
-console.log("statrt")
 Vue.prototype.$getQueryString = getQueryString;

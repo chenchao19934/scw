@@ -20,6 +20,7 @@
 @include b(dishCon) {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     width: rem(562.5);
     @include e(title) {
         position: relative;

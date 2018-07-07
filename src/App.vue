@@ -90,10 +90,10 @@ export default {
 						}else if (url === 'shareNewUser') {
 							this.$router.push({name : 'shareNewUser'})
 						}
-						// 查询用户是否绑定手机号
-						this.$store.dispatch('getBindPhone',localStorage.userId);
 					}
 				}
+				// 查询用户是否绑定手机号
+				this.$store.dispatch('getBindPhone',localStorage.userId);
 			}else {
 				if (this.$device === 'miniprogram') {
 					

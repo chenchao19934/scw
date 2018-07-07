@@ -20,9 +20,9 @@
             <span>联系客服</span>
         </div>
         <div class="wx-orderItem__btn" v-if="orderArr.state === 30">
-            <span>联系客服</span>
-            <span class="btn-green" @click.stop="contact(orderArr.order_group_id,orderArr.phone)">联系配送员</span>
             <span @click.stop="reminOrder(orderArr.order_group_id)">提醒送单</span>
+            <span v-if="orderArr.pay_type != 30" @click.stop="refund(orderArr.order_group_id)">申请退款</span>
+            <span class="btn-green" @click.stop="contact(orderArr.order_group_id,orderArr.phone)">联系配送员</span>
         </div>
         <div class="wx-orderItem__btn" v-if="orderArr.state === 40">
             <span>联系客服</span>
@@ -52,6 +52,9 @@
             },
             cancels(id) {
                 this.$emit('canOrder',id)
+            },
+            refund(id) {
+                this.$emit('refund',id)
             },
             reminOrder(id) {
                 this.$emit('remin',id)

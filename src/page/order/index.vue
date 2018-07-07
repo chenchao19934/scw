@@ -21,6 +21,7 @@
                                 @canOrder="cancelOrder"
                                 @remin="reminder"
                                 @eval="evalOrder"
+                                @refund="refundOrder"
                                 :orderArr="x"></OrderItem>
                     <p class="page-infinite-loading"
                         v-show="loading">
@@ -174,6 +175,18 @@
             cancelOrder(id) {
                 let index = this.findId(this.list,id);
                 this.$messagebox.confirm("确定取消该订单？").then( async action => {
+                    await deleteOrder({
+                        group_id :id,
+                        user_id : localStorage.userId
+                    }).then(res=> {
+                        this.list.splice(index,1);
+                    })
+                }).catch(()=> {})
+            },
+            // 申请退款
+            refundOrder(id) {
+                let index = this.findId(this.list,id);
+                this.$messagebox.confirm('订单金额将在1-3个工作日内，原路返回，订单中的优惠券及满赠礼品将不会退回哦！','退款申请?').then( async action => {
                     await deleteOrder({
                         group_id :id,
                         user_id : localStorage.userId

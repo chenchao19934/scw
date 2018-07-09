@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+		<LoadingMap :LoadMap="isShowLoadMap"></LoadingMap>
 		<keep-alive>
 			<router-view v-transition style="min-height:100vh" v-if="$route.meta.keepAlive"></router-view>
 		</keep-alive>
@@ -31,19 +32,25 @@ import {initCark,addressName,getCoupn,receiveCoupn,threePartLogin} from './api/n
 import MaskBox from './page/compon/mask';
 import BindPhone from './components/bind_phone';
 import CoupMask from './components/coup_mask';
+import LoadingMap from './components/Loading'
 export default {
 	name: "app",
 	components: {
 		MaskBox,
 		BindPhone,
-		CoupMask
+		CoupMask,
+		LoadingMap
 	},
 	data() {
 		return {
-			coupn: {}
+			coupn: {},
+			isShowLoadMap : true
 		}
 	},
 	async created() {
+		setTimeout(() => {
+			this.isShowLoadMap = false;
+		}, 5000);
 		let url = this.$getQueryString('url') || '';
 		let wechat_nickname = this.$getQueryString('wechat_nickname') || '';
 		let wechat_headurl = this.$getQueryString('wechat_headurl') || '';

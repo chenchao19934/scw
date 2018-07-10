@@ -129,6 +129,7 @@
         text-align: center;
         background-color: #e8e8e8;
         font-size: 14px;
+        z-index: 1;
     }
 }
 .selectNav {

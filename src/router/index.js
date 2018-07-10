@@ -34,6 +34,8 @@ const Gift = ()=> import('@/page/my_gift/index');
 const Balanced = ()=> import('@/page/my_banlance/index');
 const BalancedPay = ()=> import('@/page/my_banlance_pay/index');
 const BalancedRecharge = ()=> import('@/page/my_banlance_recharge/index');
+// 客服
+const Service = () => import('@/page/my_service/index');
 
 // 邀请有礼
 const Invited = ()=> import('@/page/my_invited/index');
@@ -447,6 +449,16 @@ export default new Router({
 			path : '/newUser',
 			name : 'newUser',
 			component : newUser,
+			meta : {
+				keepAlive : true,
+				isLogin : true
+			}	
+		},
+		// 客服
+		{
+			path : '/Service',
+			name : 'Service',
+			component : Service,
 			meta : {
 				keepAlive : true,
 				isLogin : true

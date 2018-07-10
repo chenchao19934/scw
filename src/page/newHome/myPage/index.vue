@@ -124,6 +124,9 @@
                     case 83 :
                         this.$router.push({name : 'Order', params : {type : '4'}})
                         break;
+                    case 84 :
+                        this.$router.push({name : 'Service'})
+                        break;
                     case 85 : 
                         window.location.href = 'https://scw.new.songcaiwa.cn/public/index.php/home/index/internal#/tab/home'
                         break;
@@ -144,6 +147,9 @@
                         break;
                     case 190 :
                         this.$router.push({name : 'BalancedPay'})
+                        break;
+                    case 192 :
+                        this.$toast('该功能内测中，即将上线，敬请期待！')
                         break;
                     default : 
                         break;

@@ -1,12 +1,12 @@
 <template>
-    <div class="loading-box" v-if="LoadMap">
-        <div class="loader JS_on">
-        <span class="binary"></span>
-        <span class="binary"></span>
-        <span class="binary"></span>
-        <span class="getting-there">LOADING STORE...</span>
-        </div>
+  <div class="loading-box" v-if="LoadMap">
+    <div class="loader JS_on">
+      <span class="binary"></span>
+      <span class="binary"></span>
+      <span class="binary"></span>
+      <span class="getting-there">LOADING STORE...</span>
     </div>
+  </div>
 </template>
 
 <script>
@@ -60,11 +60,11 @@ export default {
   }
 
   .getting-there {
-    width: 120%;
+    width: 100%;
     text-align: center;
     position: absolute;
     bottom: 0;
-    left: -7%;
+    left: 0;
     font-family: "Lato";
     font-size: 12px;
     letter-spacing: 2px;
@@ -78,7 +78,7 @@ export default {
     color: white;
     position: absolute;
     top: 0;
-    left: 25px;
+    left: 0;
     z-index: 2;
     overflow: hidden;
     font-size: 12px;
@@ -88,7 +88,7 @@ export default {
       font-size: 16px;
       position: absolute;
       top: 0;
-      left: 0;
+      left: 25px;
       opacity: 0;
     }
 

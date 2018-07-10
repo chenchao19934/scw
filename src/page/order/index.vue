@@ -74,7 +74,7 @@
             })
         },
         beforeRouteLeave(to, from, next) {
-            if (to.name !== 'my' && to.name !== 'OrderDetails' && to.name !== 'OrderEval' && to.name !== 'Pay') {
+            if (to.name !== 'my' && to.name !== 'OrderDetails' && to.name !== 'OrderEval' && to.name !== 'Pay' && to.name !== 'Service') {
                 next('/my')
             }else {
                 if(to.name === 'Pay') {
@@ -85,7 +85,7 @@
                         next('/my');
                     }
                 }else {
-                    if (to.name === 'OrderDetails' || to.name === 'OrderEval') {
+                    if (to.name === 'OrderDetails' || to.name === 'OrderEval' || to.name === 'Service') {
                         from.meta.isBack = true;
                     }else {
                         from.meta.isBack = false;

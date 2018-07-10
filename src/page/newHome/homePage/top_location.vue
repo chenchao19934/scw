@@ -2,7 +2,7 @@
     <div class="wx-location">
         <div class="wx-location__title ellipsis" @click="$router.push({name : 'homeAddress'})">{{title}}▼</div>
         <div class="wx-location__icon" @click="$router.push({name : 'search'})"></div>
-        <div class="wx-location__icon"></div>
+        <div class="wx-location__icon" @click="$router.push({name : 'Service'})"></div>
     </div>
 </template>
 
@@ -20,14 +20,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 5px;
+    padding: 5px rem(10);
     height: 44px;
     z-index: 10; 
     background-color: #fff;
     @include e(title) {
         position: relative;
         float: left;
-        width: rem(576);
+        width: rem(560);
         padding-left: rem(70);
         font-size: 16px;
         background-color: #f0f0f0;
@@ -49,9 +49,8 @@
     }
     @include e(icon) {
         float: left;
-        width: rem(40);
+        width: rem(85);
         height: 34px;
-        margin-left: rem(30);
     }
     :nth-child(2) {
         background: url('../../../assets/image/scw/home_search.jpg') center no-repeat;

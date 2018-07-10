@@ -1,6 +1,6 @@
 <template>
     <div class="wx-orderBtn">
-        <mt-button size="small">联系客服</mt-button>
+        <mt-button size="small" @click.native="$router.push({name : 'Service'})">联系客服</mt-button>
         <mt-button size="small" 
                     type="primary" 
                     @click.native="shareOrder"

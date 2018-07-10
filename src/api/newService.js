@@ -910,3 +910,12 @@ export const receivePack = ({
     method,
     url : `${apiUrl}${url}?user_id=${user_id}&share_id=${share_id}`
 })
+// 客服unionid
+export const getUnionid = ({
+    method = 'get',
+    url = '/login/union',
+    user_id
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}/unionid/${user_id}`
+})

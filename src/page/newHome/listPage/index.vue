@@ -118,9 +118,13 @@
 
 <style lang="scss" scoped>
 @include b(list) {
-    padding-top: 44px;
+    padding-top: 72px;
     height: 100vh;
     @include e(time) {
+        position: fixed;
+        left: 0;
+        top: 44px;
+        width: 100%;
         line-height:28px;
         text-align: center;
         background-color: #e8e8e8;

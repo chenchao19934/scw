@@ -14,7 +14,7 @@
         <div class="wx-orderItem__btn" v-if="orderArr.state === 10">
             <mt-button size="small" 
                         type="primary"
-                        @click.native="connect">联系客服</mt-button>
+                        @click.native.stop="connect">联系客服</mt-button>
             <mt-button size="small" 
                         type="danger"
                         v-if="orderArr.pay_type != 30" 
@@ -26,7 +26,7 @@
         <div class="wx-orderItem__btn" v-if="orderArr.state === 20">
             <mt-button size="small" 
                         type="primary"
-                        @click.native="connect">联系客服</mt-button>
+                        @click.native.stop="connect">联系客服</mt-button>
         </div>
         <div class="wx-orderItem__btn" v-if="orderArr.state === 30">
             <mt-button size="small" 
@@ -44,7 +44,7 @@
         <div class="wx-orderItem__btn" v-if="orderArr.state === 40">
             <mt-button size="small" 
                         type="primary"
-                        @click.native="connect">联系客服</mt-button>
+                        @click.native.stop="connect">联系客服</mt-button>
             <mt-button size="small" 
                     type="primary" 
                     @click.stop="contact(orderArr.order_group_id,orderArr.phone)">联系配送员</mt-button>
@@ -56,7 +56,7 @@
         <div class="wx-orderItem__btn" v-if="orderArr.state >= 50 && orderArr.state!=100">
             <mt-button size="small" 
                         type="primary"
-                        @click.native="connect">联系客服</mt-button>
+                        @click.native.stop="connect">联系客服</mt-button>
             <mt-button size="small" 
                         type="danger"
                         @click.stop="deletes(orderArr.order_group_id)">删除订单</mt-button>

@@ -1,6 +1,8 @@
 <template>
     <div style="padding-top:82px;background-color:#f0f0f0">
-        <TopNav titles="我的订单"></TopNav>
+        <TopNav titles="我的订单" 
+                :isConfirm="true" 
+                @backs="backMy"></TopNav>
         <TopList :arr="navList"
                  @order="changeNavIndex"></TopList>
         <div ref="list" 
@@ -204,6 +206,10 @@
             // 评价订单
             evalOrder(id) {
                 this.$router.push({name : 'OrderEval',params : {groupId : id}})
+            },
+            // 返回
+            backMy() {
+                this.$router.push({name : 'my'})
             },
             // 关闭联系配送员弹窗
             closeMask() {

@@ -1,7 +1,10 @@
 <template>
     <div class="wx-bar" ref="bar">
         <ul class="wx-bar__show" :style="getWidth">
-            <li class="wx-bar__item" :class="{item_active : barSelect == index}" @click="changeBarSelect(index)" v-for="(x,index) in bar" :key="index" >{{x}}</li>
+            <li class="wx-bar__item" :class="{item_active : barSelect == index}" 
+                                    @click="changeBarSelect(index)" 
+                                    v-for="(x,index) in bar" 
+                                    :key="index" >{{x}}</li>
         </ul>
     </div>
 </template>

@@ -1,8 +1,7 @@
 <template>
     <div style="padding-bottom:10px">
         <topLocation :title="addressName"></topLocation>
-        <topTab ref='bar' :barIndex="bars" 
-                          @getSeconData="getSecon"
+        <topTab ref='bar' :barIndex.sync="bars"
                           :barItem="secondNav"></topTab>
         <mt-tab-container v-model="bars">
             <mt-tab-container-item id="0">
@@ -264,18 +263,14 @@
                 if(this.bars > this.secondNav.length-1){
                     this.bars = 0;
                 }
-                this.$refs.bar.$emit('swiperLeft',this.bars+'');
+                this.bars = this.bars+'';
             },
             sRight() {
                 this.bars--;
                 if(this.bars < 0){
                     this.bars = this.secondNav.length-1;
                 }
-                this.$refs.bar.$emit('swiperLeft',this.bars+'');
-            },
-            // 二级导航栏索引
-            getSecon(e) {
-                this.bars = e+'';
+                this.bars = this.bars+'';
             },
             // 水果数据
             async getFruilt() {
@@ -306,7 +301,6 @@
                 await snacksList({}).then(res => {
                     this.snack = res.data;
                 });
-                console.log(this.snacks);
             },
             // 酒水茶饮
             async getMilk() {

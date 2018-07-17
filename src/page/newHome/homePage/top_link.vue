@@ -28,10 +28,10 @@
                 scroll : null,
             }
         },
-        created() {
-            this.$on('swiperLeft',(e) => {
-                this.scrollToLocatin(e);
-            })
+        watch : {
+            barIndex(n) {
+                this.scrollToLocatinSwiper(n);
+            }
         },
         activated() {
             this.$nextTick(()=> {
@@ -46,8 +46,12 @@
             })
         },
         methods : {
+            // 点击切换索引
             scrollToLocatin(index) {
-                this.$emit('getSeconData',index);
+                this.$emit('update:barIndex', index+'')
+            },
+            // 父组件滑动切换
+            scrollToLocatinSwiper(index) {
                 this.scrollTo(this.barItem,index);
             },
             scrollTo(data,nowIndex) {

@@ -129,7 +129,9 @@
             ])
         },
         methods: {
-            // 初始化购物车
+            /**
+             * [初始化购物车]
+             */
             async initCark() {
                 let count = 0;
                 if (this.$store.state.isLogin) {
@@ -159,13 +161,18 @@
                 })
                 this.$store.state.shopCarkLenth = count;
             },
-            // 本地购物车
+            /**
+             * [获取本地购物车]
+             */
             getLocalGoods() {
                 if (localStorage.ShoppingCart) {
                     this.goodsList = JSON.parse(localStorage.ShoppingCart);
                 }
             },
-            // 重新保存
+            /**
+             * [重新保存]
+             * @param  {object} obj [购物车商品]
+             */
             saveLocal(obj) {
                 let count = 0;
                 localStorage.ShoppingCart = JSON.stringify(obj);
@@ -174,14 +181,22 @@
                 })
                 this.$store.state.shopCarkLenth = count;
             },
-            // 数组索引
+            /**
+             * [数组索引]
+             * @param  {number} id [索引id]
+             * @return {number} [在数组中的位置]
+             */
             findId(id) {
                 let index = this.goodsList.findIndex(v=> {
                     return v.goods_id === id
                 })
                 return index;
             },
-            // 增加商品数量
+            /**
+             * [增加商品数量]
+             * @param  {string} goods_id [商品ID]
+             * @param  {number} multitype_id [是否多规格]
+             */
             async add(goods_id,multitype_id) {
                 if (this.$store.state.isLogin) {
                     if (multitype_id === 0) {
@@ -208,7 +223,11 @@
                     }
                 }
             },
-            // 减少商品数量
+            /**
+             * [减少商品数量]
+             * @param  {number} goods_id [商品ID]
+             * @param  {number} multitype_id [是否多规格]
+             */
             async reduce(goods_id,multitype_id) {
                 if (this.$store.state.isLogin) {
                     await reduceGoods({
@@ -232,7 +251,10 @@
                     }
                 }
             },
-            // 选中部分或全部商品
+            /**
+             * [选中部分或全部商品]
+             * @param {boolean} boolean [商品选中状态]
+             */
             async selectAll(boolean) {
                 if (this.$store.state.isLogin) {
                     await selectAll({
@@ -248,7 +270,12 @@
                     this.saveLocal(this.goodsList);
                 }
             },
-            // 选择单一商品
+            /**
+             * [选择单一商品]
+             * @param  {boolean} boolean [商品选中状态]
+             * @param  {number} goods_id [商品ID]
+             * @param  {number} multitype_id [是否多规格 0不是多规格]
+             */
             async selectOne(boolean,goods_id,multitype_id) {
                 if (this.$store.state.isLogin) {
                     await selectOne({
@@ -369,7 +396,6 @@
             },
             // 验证购物车
             checkShopCark() {
-                console.log(this.$store.state.isBindPhone);
                 if (this.$store.state.isBindPhone) {
                     this.goodsList.forEach(element => {
                         if (element.check === false) this.selectGoodsNumber ++;

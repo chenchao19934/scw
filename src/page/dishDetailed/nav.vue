@@ -15,7 +15,7 @@
 
 <style lang="scss" scoped>
 @include b(nav) {
-    position: absolute;
+    position: fixed;
     top: -170px;
     right: 0;
     width: rem(200);

@@ -1,5 +1,5 @@
 <template>
-    <li class="wx-comItem clearfix">
+    <li class="wx-comItem clearfix" v-if="comment">
         <div class="wx-comItem__img left">
             <img v-lazy="comment.img +'?x-oss-process=image/resize,w_60/format,jpg/quality,Q_80'">
         </div>

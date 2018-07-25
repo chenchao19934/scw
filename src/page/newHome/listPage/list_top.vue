@@ -15,9 +15,7 @@
 
 <style lang="scss" scoped>
 @include b(listbar) {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     padding: 5px rem(30);
     background-color: #fff;
     height: 44px;

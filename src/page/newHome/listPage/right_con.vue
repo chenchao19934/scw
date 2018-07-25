@@ -22,6 +22,9 @@
     flex-wrap: wrap;
     align-content: flex-start;
     width: rem(562.5);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: rem(228);
     @include e(title) {
         position: relative;
         text-align: center;

@@ -2,19 +2,28 @@
     <div class="wx-list">
         <TopBar ref="bar"></TopBar>
         <div class="wx-list__time" ref="time">{{time}}</div>
-        <LeftNav :style="setH">
-            <LeftNavItem v-for="(x,index) in leftArr" 
-                            :items="x"
-                            :class="{'selectNav' : selectNav==index}" 
-                            @click.native="changeNav(index,x.id,x.name)"
-                            :key="index"></LeftNavItem>
-        </LeftNav>
-        <div :style="setH" class="left" style="overflow-y: scroll;overflow-x: hidden;">
+        <div class="wx-list__contain" :style="setH" >
+            <LeftNav>
+                <LeftNavItem v-for="(x,index) in leftArr" 
+                                :items="x"
+                                :class="{'selectNav' : selectNav==index}" 
+                                @click.native="changeNav(index,x.id,x.name)"
+                                :key="index"></LeftNavItem>
+                <LeftNavItem v-for="(x,index) in leftArr" 
+                                :items="x"
+                                :class="{'selectNav' : selectNav==index}" 
+                                @click.native="changeNav(index,x.id,x.name)"
+                                :key="index+999"></LeftNavItem>
+            </LeftNav>
             <RightCon :title="leftConTit">
                 <RightConItem v-for="(x, index) in leftCon" 
                                 :item="x"
                                 @click.native="toDishPage(x.id,index+1,x.pid)"
                                 :key="x.id"></RightConItem>
+                    <RightConItem v-for="(x, index) in leftCon" 
+                                :item="x"
+                                @click.native="toDishPage(x.id,index+1,x.pid)"
+                                :key="x.id+index"></RightConItem>
             </RightCon>
         </div>
         <fixedBar></fixedBar>
@@ -118,18 +127,18 @@
 
 <style lang="scss" scoped>
 @include b(list) {
-    padding-top: 72px;
-    height: 100vh;
+    height: 80vh;
     @include e(time) {
-        position: fixed;
-        left: 0;
-        top: 44px;
         width: 100%;
         line-height:28px;
         text-align: center;
         background-color: #e8e8e8;
         font-size: 14px;
         z-index: 1;
+    }
+    @include e(contain) {
+        display: flex;
+        overflow: hidden;
     }
 }
 .selectNav {

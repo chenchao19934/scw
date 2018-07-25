@@ -55,6 +55,7 @@
     "http-proxy-middleware": "^0.17.3",
     "lodash-webpack-plugin": "^0.11.4",
     "mob-multi-picker": "^1.2.2",
+    "mockjs": "^1.0.1-beta3",
     "my-local-ip": "^1.0.0",
     "node-sass": "^4.5.3",
     "opn": "^5.1.0",

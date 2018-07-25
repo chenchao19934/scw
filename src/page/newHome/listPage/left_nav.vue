@@ -1,5 +1,5 @@
 <template>
-    <div class="wx-left left">
+    <div class="wx-left">
         <slot></slot>
     </div>
 </template>
@@ -16,5 +16,6 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: #f5f5f5;
+    padding-bottom: rem(228);
 }
 </style>

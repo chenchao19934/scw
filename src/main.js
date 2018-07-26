@@ -17,6 +17,8 @@ Object.keys(filters).forEach((key) => {
 // 指令
 import '@/directive/';
 
+// 引入mockjs
+require('./mock.js');
 
 import router from '@/router';
 import App from '@/App';

@@ -40,27 +40,13 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
     proxyTable: {
-      // '/pay': {
-      //   target: 'http://test2.api.w-lans.cn',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/pay': '/pay',
-      //   },
-      // },
-      // '/Member': {
-      //   target: 'http://test2.api.w-lans.cn',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/Member': '/Member',
-      //   },
-      // },
-      // '/Webapi': {
-      //   target: 'http://testadmin.w-lans.com',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/Webapi': '/Webapi',
-      //   },
-      // },
+      '/public': {
+        target : 'https://scw.new.songcaiwa.cn/public/index.php/home',
+        changeOrigin :true,
+        pathRewrite : {
+          '^/public' : ''
+        }
+      }
     },
   },
 };

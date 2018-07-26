@@ -27,7 +27,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import {initCark,addressName,getCoupn,receiveCoupn,threePartLogin} from './api/newService';
+import {initCark,addressName,getCoupn,receiveCoupn,threePartLogin,mockTste} from './api/newService';
 
 import MaskBox from './page/compon/mask';
 import BindPhone from './components/bind_phone';
@@ -51,6 +51,9 @@ export default {
 		setTimeout(() => {
 			this.isShowLoadMap = false;
 		}, 5000);
+
+		this.initMock();
+		
 		let url = this.$getQueryString('url') || '';
 		let wechat_nickname = this.$getQueryString('wechat_nickname') || '';
 		let wechat_headurl = this.$getQueryString('wechat_headurl') || '';
@@ -197,6 +200,11 @@ export default {
 		},
 		closeMask() {
 			this.$store.state.isShowMask = false;
+		},
+		// mock模拟数据
+		async initMock() {
+			let data = await mockTste({});
+			console.log(data);
 		}
 	},
 };

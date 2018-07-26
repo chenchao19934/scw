@@ -1,6 +1,6 @@
 import newFetch from '../utils/newFetch';
 
-const apiUrl = '/public/index.php/home';
+const apiUrl = '/public';
 export const newHomeList = ({
     url = '/index/home',
     method = 'get',
@@ -918,4 +918,13 @@ export const getUnionid = ({
 }) => newFetch({
     method,
     url : `${apiUrl}${url}/unionid/${user_id}`
+})
+
+// mock 模拟接口数据
+export const mockTste = ({
+    method = 'get',
+    url = '/news/index',
+}) => newFetch({
+    method,
+    url : `${apiUrl}${url}`
 })

@@ -1,5 +1,4 @@
-const Mock = require('mockjs');
-
+import Mock from 'mockjs';
 const Random = Mock.Random;
 
 const produceNewsData = function () {

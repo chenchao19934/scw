@@ -9,21 +9,12 @@
                                 :class="{'selectNav' : selectNav==index}" 
                                 @click.native="changeNav(index,x.id,x.name)"
                                 :key="index"></LeftNavItem>
-                <LeftNavItem v-for="(x,index) in leftArr" 
-                                :items="x"
-                                :class="{'selectNav' : selectNav==index}" 
-                                @click.native="changeNav(index,x.id,x.name)"
-                                :key="index+999"></LeftNavItem>
             </LeftNav>
             <RightCon :title="leftConTit">
                 <RightConItem v-for="(x, index) in leftCon" 
                                 :item="x"
                                 @click.native="toDishPage(x.id,index+1,x.pid)"
                                 :key="x.id"></RightConItem>
-                    <RightConItem v-for="(x, index) in leftCon" 
-                                :item="x"
-                                @click.native="toDishPage(x.id,index+1,x.pid)"
-                                :key="x.id+index"></RightConItem>
             </RightCon>
         </div>
         <fixedBar></fixedBar>

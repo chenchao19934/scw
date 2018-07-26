@@ -1,8 +1,14 @@
 <template>
     <ul class="wx-nav">
-        <li><span></span>搜索</li>
-        <li><span></span>分类</li>
-        <li><span></span>首页</li>
+        <router-link to="/search">
+            <li><span></span>搜索</li>
+        </router-link>
+        <router-link to="/list">
+            <li><span></span>分类</li>
+        </router-link>
+        <router-link to="/home">
+            <li><span></span>首页</li>
+        </router-link>
         <div></div>
     </ul>
 </template>

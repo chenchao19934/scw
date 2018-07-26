@@ -17,5 +17,6 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+###首页点击叶子图标
+[访问地址](https://chenchao19934.github.io/home.github.com/ "悬停显示")
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

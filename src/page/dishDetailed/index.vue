@@ -53,8 +53,9 @@
                         :comImprove="comData.score_gj"></comCon>
                 <div class="tab-con" ref="list" :style="{ height: listHeight, overflow: 'scroll'}">
                     <ul v-infinite-scroll="loadMore"
-                                infinite-scroll-disabled="loading"
-                                infinite-scroll-distance="50">
+                        infinite-scroll-immediate-check="false"
+                        infinite-scroll-disabled="loading"
+                        infinite-scroll-distance="50">
                             <comItem  @openImg="showBigFn" v-for="x in comList" :key="x.id" :comment="x"></comItem>
                             
                             <div class="no-data" v-if="comList.length === 0" style="padding-top:45%" >
@@ -198,6 +199,7 @@
                     this.isCollections = await isCollection({user_id:'ee363d1cdb1d4e45a118cce9d9eb7ced',goods_id:this.id});
                 }
                 this.initShare();
+                this.loadMore();
                 setTimeout(() => {
                      this.$indicator.close();
                 }, 500);
@@ -225,22 +227,21 @@
                 }
                 this.loading = true;
                 const data = await dishComment({id:this.id,attach:this.attach,type:this.type,page:this.count});
-                this.comData = data;
+                if (this.count === 1 && this.type === 3) {
+                    this.comData = data;
+                }
                 setTimeout(()=> {
                     if(data.length != 0 && data.list.length === 10){
                         this.comList.push(...data.list);
                         this.count++;
                         this.loading = false;
                     }else {
-                        if(data.length === 0) {
-
-                        }else {
+                        if(data.length !== 0) {
                             this.comList.push(...data.list);
                         }
                         this.infiniteScrollTips = "数据加载完毕";
                         setTimeout(() => {
                             this.loading = false;
-                            this.noData = true;
                             this.allLoaded = true;
                         }, 1000);
                     }
@@ -257,7 +258,6 @@
             initScroll(comType,contents) {
                 this.comList = [];
                 this.allLoaded = false;
-                this.noData = false;
                 this.count = 1;
                 this.infiniteScrollTips = '加载中...';
                 this.attach = !contents ? 1 : 2;
@@ -407,7 +407,7 @@
     width: 100%;
 }
 .tab-con {
-    padding: rem(10) rem(20) rem(30);
+    padding-top: rem(10);
 }
 .scale {
   animation: scale 0.5s ease;

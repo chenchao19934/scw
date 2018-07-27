@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="wx-leftItem__img">
-            <img v-lazy="goodItemList.img + '?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
+            <img class="class="page-lazyload-image"" v-lazy="goodItemList.img + '?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
         </div>
 
         <transition appear 
@@ -77,6 +77,7 @@
             color: #fff;
             background-color: #abd13e;
             border-radius: rem(16);
+            z-index: 1;
         }
     }
     @include e(text) {

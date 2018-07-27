@@ -1,7 +1,7 @@
 <template>
     <div class="wx-leftItem" @click="$router.push({name : 'dishDetail', params:{pid:goodItemList.id}})">
         <div class="wx-leftItem__img">
-            <img v-lazy="goodItemList.img + '?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
+            <img class="page-lazyload-image" v-lazy="goodItemList.img + '?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
             <span v-if="goodItemList.tag">{{goodItemList.tag}}</span>
         </div>
         <div class="wx-leftItem__text">
@@ -74,6 +74,7 @@
             color: #fff;
             background-color: #abd13e;
             border-radius: rem(16);
+            z-index: 1;
         }
     }
     @include e(text) {

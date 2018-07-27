@@ -241,11 +241,14 @@ export default {
 	width: 100%;
 	height: 100%;
 	margin: auto;
-	background: url("./assets/image/lazy.gif");
-	background-size: rem(32) rem(32);
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-color: #fff;
+	opacity: 0;
+}
+.page-lazyload-image[lazy="loaded"] {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	opacity: 1;
+	transition: opacity 0.5s ease-in-out;
 }
 
 /* 无限加载 */

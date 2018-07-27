@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-top:42px;padding-bottom:10px;background-color:#f0f0f0;">
+    <div style="padding-top:88px;padding-bottom:10px;background-color:#f0f0f0;">
         <TonNav titles="优惠券"></TonNav>
         <Exchange @successChage="refresh"></Exchange>
         <div class="wx-couWrap">

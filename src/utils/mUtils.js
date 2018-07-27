@@ -44,6 +44,22 @@ export const getStyle = (element, attr, NumberMode = 'int') => {
 };
 
 /**
+ * 将秒数转化为时：分：秒
+ */
+export function formatSeconds(val = 0) {
+	if (val) {
+		let hour = parseInt(val/3600),
+			min = parseInt((val - 3600*hour)/60),
+			second = parseInt(val - 3600*hour - 60*min);
+		hour = hour < 10 ? `0${hour}` : hour;
+		min = min < 10 ? `0${min}` : min;
+		second = second < 10 ? `0${second}` : second;
+		return [hour,min,second];
+	}else {
+		return;
+	}
+}
+/**
  * 页面到达底部，加载更多
  */
 export const loadMore = (element, callback) => {

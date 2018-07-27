@@ -2,7 +2,7 @@
     <div class="wx-item3" @click="toPage(goodsLikeItem.id)">
         <div class="wx-item3__imgWrap">
             <span v-if="goodsLikeItem.tag">{{goodsLikeItem.tag}}</span>
-            <img v-lazy="goodsLikeItem.img + '?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
+            <img class="page-lazyload-image" v-lazy="goodsLikeItem.img + '?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
         </div>
         <div class="wx-item3__text">
             <h2 class="ellipsis">{{goodsLikeItem.name}}</h2>
@@ -62,6 +62,7 @@
             border-radius: 10px;
             padding: 2px 10px;
             color: #fff;
+            z-index: 1;
         }
     }
     @include e(text) {

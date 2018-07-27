@@ -39,9 +39,13 @@
 
 <style lang="scss" scoped>
 @include b(exchange) {
+    position: fixed;
+    left: 0;
+    top: 41px;
     height : 44px;
     padding : 5px rem(32);
     background-color : #fff;
+    z-index: 1;
     label {
         float: left;
         width : rem(560);

@@ -5,7 +5,7 @@
             <em v-if="goodItemList.oss == 1">
                 <img src="static/quehuo.png">
             </em>
-            <img v-lazy="goodItemList.img +'?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
+            <img class="page-lazyload-image" v-lazy="goodItemList.img +'?x-oss-process=image/resize,w_240/format,jpg/quality,Q_80'">
         </div>
         <div class="wx-item__text left">
             <h2 class="ellipsis">{{goodItemList.name}}</h2>
@@ -77,6 +77,7 @@
             border-radius: 10px;
             padding: 2px 8px;
             color: #fff;
+            z-index: 1;
         }
         em {
             position: absolute;

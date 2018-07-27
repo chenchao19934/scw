@@ -203,6 +203,7 @@
     background: #abd13e;
     color: #fff;
     font-size: 14px;
+    z-index: 1;
 }
 @include b(content) {
     padding : rem(30);
